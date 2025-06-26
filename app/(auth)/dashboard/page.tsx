@@ -24,15 +24,17 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import HabitsPage from './components/HabitsPage'
 
 const navigation = [
 
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+  { name: 'Dashboard', icon: HomeIcon, current: true },
+  { name: 'Habits', icon: BellIcon, current: false },
+  { name: 'Team', icon: UsersIcon, current: false },
+  { name: 'Projects', icon: FolderIcon, current: false },
+  { name: 'Calendar', icon: CalendarIcon, current: false },
+  { name: 'Documents', icon: DocumentDuplicateIcon, current: false },
+  { name: 'Reports', icon: ChartPieIcon, current: false },
 
 ]
 const teams = [
@@ -55,7 +57,7 @@ function classNames(...classes) {
 
 export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
+  const [page, setPage] = useState("home")
   return (
     <>
       {/*
@@ -102,8 +104,8 @@ export default function Example() {
                       <ul role="list" className="-mx-2 space-y-1">
                         {navigation.map((item) => (
                           <li key={item.name}>
-                            <a
-                              href={item.href}
+                            <p
+                              onClick={() => setPage(item.name.toLowerCase())}
                               className={classNames(
                                 item.current
                                   ? 'bg-gray-800 text-white'
@@ -113,7 +115,7 @@ export default function Example() {
                             >
                               <item.icon aria-hidden="true" className="size-6 shrink-0" />
                               {item.name}
-                            </a>
+                            </p>
                           </li>
                         ))}
                       </ul>
@@ -174,8 +176,8 @@ export default function Example() {
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map((item) => (
                       <li key={item.name}>
-                        <a
-                          href={item.href}
+                        <p
+                          onClick={() => setPage(item.name.toLowerCase())}
                           className={classNames(
                             item.current
                               ? 'bg-gray-800 text-white'
@@ -185,7 +187,7 @@ export default function Example() {
                         >
                           <item.icon aria-hidden="true" className="size-6 shrink-0" />
                           {item.name}
-                        </a>
+                        </p>
                       </li>
                     ))}
                   </ul>
@@ -298,7 +300,9 @@ export default function Example() {
           </div>
 
           <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">{/* Your content */}</div>
+            <div className="px-4 sm:px-6 lg:px-8">
+              {page === "habits" && <HabitsPage />}
+            </div>
           </main>
         </div>
       </div>
