@@ -32,7 +32,7 @@ const navigation = [
   { name: 'Home', icon: HomeIcon, href: '/' },
   { name: 'Dashboard', icon: PresentationChartLineIcon, href: '/dashboard' },
   { name: 'Habits', icon: BellIcon, href: '/dashboard/habits' },
-  { name: 'Team', icon: UsersIcon, href: '/dashboard/team' },
+  { name: 'Friends', icon: UsersIcon, href: '/dashboard/friends' },
   { name: 'Projects', icon: FolderIcon, href: '/dashboard/projects' },
   { name: 'Calendar', icon: CalendarIcon, href: '/dashboard/calendar' },
   { name: 'Documents', icon: DocumentDuplicateIcon, href: '/dashboard/documents' },
