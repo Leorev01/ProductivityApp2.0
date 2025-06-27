@@ -14,6 +14,7 @@ import {
   TransitionChild,
 } from '@headlessui/react'
 import {
+  PresentationChartLineIcon,
   Bars3Icon,
   BellIcon,
   CalendarIcon,
@@ -28,7 +29,8 @@ import {
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
 const navigation = [
-  { name: 'Dashboard', icon: HomeIcon, href: '/dashboard' },
+  { name: 'Home', icon: HomeIcon, href: '/' },
+  { name: 'Dashboard', icon: PresentationChartLineIcon, href: '/dashboard' },
   { name: 'Habits', icon: BellIcon, href: '/dashboard/habits' },
   { name: 'Team', icon: UsersIcon, href: '/dashboard/team' },
   { name: 'Projects', icon: FolderIcon, href: '/dashboard/projects' },
