@@ -1,27 +1,46 @@
 'use client'
 
 import { useState } from 'react'
-import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
-import { CalendarIcon, PaperClipIcon, TagIcon } from '@heroicons/react/20/solid'
+import {
+  Label,
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions
+} from '@headlessui/react'
+import {
+  CalendarIcon,
+  PaperClipIcon,
+  TagIcon
+} from '@heroicons/react/20/solid'
 
 const labels = [
   { name: 'Unlabelled', value: null },
-  { name: 'Engineering', value: 'engineering' },
-  // More items...
-]
-const dueDates = [
-  { name: 'No due date', value: null },
-  { name: 'Today', value: 'today' },
-  // More items...
+  { name: 'Morning Routine', value: 'morning_routine' },
+  { name: 'Exercise', value: 'exercise' },
+  { name: 'Reading', value: 'reading' },
+  { name: 'Meditation', value: 'meditation' },
+  { name: 'Healthy Eating', value: 'healthy_eating' },
+  { name: 'Hydration', value: 'hydration' },
+  { name: 'Sleep Hygiene', value: 'sleep_hygiene' },
+  { name: 'Gratitude Journaling', value: 'gratitude_journaling' },
+  { name: 'Learning a New Skill', value: 'learning_new_skill' },
+  { name: 'Time Management', value: 'time_management' },
+  { name: 'Digital Detox', value: 'digital_detox' },
+  { name: 'Social Interaction', value: 'social_interaction' },
+  { name: 'Financial Tracking', value: 'financial_tracking' },
+  { name: 'Creative Writing', value: 'creative_writing' },
+  { name: 'Outdoor Activities', value: 'outdoor_activities' }
 ]
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function AddHabit() {
   const [labelled, setLabelled] = useState(labels[0])
-  const [dated, setDated] = useState(dueDates[0])
+  const [dueDate, setDueDate] = useState('')
+  const today = new Date().toISOString().split('T')[0]
 
   return (
     <form action="#" className="relative">
@@ -34,7 +53,7 @@ export default function Example() {
           name="title"
           type="text"
           placeholder="Title"
-          className="block w-full px-3 pt-2.5 text-lg font-medium text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0"
+          className="block w-full px-3 pt-2.5 text-lg font-medium text-gray-900 placeholder:text-gray-400 focus:outline-none"
         />
         <label htmlFor="description" className="sr-only">
           Description
@@ -44,11 +63,10 @@ export default function Example() {
           name="description"
           rows={2}
           placeholder="Write a description..."
-          className="block w-full resize-none px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+          className="block w-full resize-none px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
           defaultValue={''}
         />
-
-        {/* Spacer element to match the height of the toolbar */}
+        {/* Spacer */}
         <div aria-hidden="true">
           <div className="py-2">
             <div className="h-9" />
@@ -62,10 +80,11 @@ export default function Example() {
         </div>
       </div>
 
+      {/* Bottom Toolbar */}
       <div className="absolute inset-x-px bottom-0">
-        {/* Actions: These are just examples to demonstrate the concept, replace/wire these up however makes sense for your project. */}
         <div className="flex flex-nowrap justify-end space-x-2 px-2 py-2 sm:px-3">
 
+          {/* Label Picker */}
           <Listbox as="div" value={labelled} onChange={setLabelled} className="shrink-0">
             <Label className="sr-only">Add a label</Label>
             <div className="relative">
@@ -74,28 +93,25 @@ export default function Example() {
                   aria-hidden="true"
                   className={classNames(
                     labelled.value === null ? 'text-gray-300' : 'text-gray-500',
-                    'size-5 shrink-0 sm:-ml-1',
+                    'size-5 shrink-0 sm:-ml-1'
                   )}
                 />
                 <span
                   className={classNames(
                     labelled.value === null ? '' : 'text-gray-900',
-                    'hidden truncate sm:ml-2 sm:block',
+                    'hidden truncate sm:ml-2 sm:block'
                   )}
                 >
                   {labelled.value === null ? 'Label' : labelled.name}
                 </span>
               </ListboxButton>
 
-              <ListboxOptions
-                transition
-                className="absolute right-0 z-10 mt-1 max-h-56 w-52 overflow-auto rounded-lg bg-white py-3 text-base shadow outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
-              >
+              <ListboxOptions className="absolute right-0 z-10 mt-1 max-h-56 w-52 overflow-auto rounded-lg bg-white py-3 text-base shadow outline outline-1 outline-black/5 sm:text-sm">
                 {labels.map((label) => (
                   <ListboxOption
                     key={label.value}
                     value={label}
-                    className="cursor-default select-none bg-white px-3 py-2 data-[focus]:relative data-[focus]:bg-gray-100 data-[focus]:hover:outline-none"
+                    className="cursor-default select-none bg-white px-3 py-2 data-[focus]:bg-gray-100"
                   >
                     <div className="flex items-center">
                       <span className="block truncate font-medium">{label.name}</span>
@@ -106,46 +122,29 @@ export default function Example() {
             </div>
           </Listbox>
 
-          <Listbox as="div" value={dated} onChange={setDated} className="shrink-0">
-            <Label className="sr-only">Add a due date</Label>
-            <div className="relative">
-              <ListboxButton className="relative inline-flex items-center whitespace-nowrap rounded-full bg-gray-50 px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 sm:px-3">
-                <CalendarIcon
-                  aria-hidden="true"
-                  className={classNames(
-                    dated.value === null ? 'text-gray-300' : 'text-gray-500',
-                    'size-5 shrink-0 sm:-ml-1',
-                  )}
+          {/* Styled Date Picker */}
+          <div className="flex flex-col items-start">
+            <div className="relative inline-flex items-center whitespace-nowrap rounded-full bg-gray-50 px-3 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100">
+                <CalendarIcon className="mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
+                <input
+                type="date"
+                id="startDate"
+                name="startDate"
+                aria-label="Start date"
+                title="Start date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+                min={today}
+                className="bg-transparent outline-none text-sm text-gray-700 placeholder:text-gray-400 focus:ring-0"
                 />
-                <span
-                  className={classNames(
-                    dated.value === null ? '' : 'text-gray-900',
-                    'hidden truncate sm:ml-2 sm:block',
-                  )}
-                >
-                  {dated.value === null ? 'Due date' : dated.name}
-                </span>
-              </ListboxButton>
-
-              <ListboxOptions
-                transition
-                className="absolute right-0 z-10 mt-1 max-h-56 w-52 overflow-auto rounded-lg bg-white py-3 text-base shadow outline outline-1 outline-black/5 data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
-              >
-                {dueDates.map((dueDate) => (
-                  <ListboxOption
-                    key={dueDate.value}
-                    value={dueDate}
-                    className="cursor-default select-none bg-white px-3 py-2 data-[focus]:relative data-[focus]:bg-gray-100 data-[focus]:hover:outline-none"
-                  >
-                    <div className="flex items-center">
-                      <span className="block truncate font-medium">{dueDate.name}</span>
-                    </div>
-                  </ListboxOption>
-                ))}
-              </ListboxOptions>
             </div>
-          </Listbox>
+            <p className="text-xs text-gray-500 mt-1 ml-1">This is the start date of your habit.</p>
+          </div>
+
+
         </div>
+
+        {/* Action Row */}
         <div className="flex items-center justify-between space-x-3 border-t border-gray-200 px-2 py-2 sm:px-3">
           <div className="flex">
             <button
