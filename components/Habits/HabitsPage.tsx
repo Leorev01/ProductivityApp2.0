@@ -1,6 +1,6 @@
 import { PlusIcon } from "@heroicons/react/16/solid";
 import Habits from "./Habit";
-import { habits } from "@/utils/habitStorage"; // Assuming you have a data file with habits
+import { habits } from "@/utils/habits.json"; // Assuming you have a data file with habits
 import Link from "next/link";
 const HabitsPage = () => {
   return (

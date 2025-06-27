@@ -1,0 +1,50 @@
+{
+  "habits": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Drink Water",
+      "description": "Drink at least 2 liters of water daily.",
+      "createdAt": "2025-06-01"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "title": "Exercise",
+      "description": "30 minutes of exercise every day.",
+      "createdAt": "2025-06-01"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "title": "Learn French",
+      "description": "Do at least 20 minutes of Duolingo in French daily.",
+      "createdAt": "2025-06-01"
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "title": "Meditate",
+      "description": "Meditate for 10 minutes every morning.",
+      "createdAt": "2025-06-01"
+    }
+  ],
+  "dailyCompletions": [
+    {
+      "date": "2025-06-25",
+      "completedHabits": [1, 2, 3, 4],
+      "isGreenDay": true
+    },
+    {
+      "date": "2025-06-26",
+      "completedHabits": [1, 3],
+      "isGreenDay": false
+    },
+    {
+      "date": "2025-06-27",
+      "completedHabits": [1, 2, 3, 4],
+      "isGreenDay": true
+    }
+  ],
+  "lastUpdated": "2025-06-27T10:30:00.000Z"
+}
