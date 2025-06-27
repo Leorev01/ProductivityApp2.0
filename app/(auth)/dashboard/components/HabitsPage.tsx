@@ -1,3 +1,4 @@
+import { PlusIcon } from "@heroicons/react/16/solid";
 import Habits from "./Habit";
 
 const habits = [
@@ -24,7 +25,16 @@ const habits = [
 ]
 const HabitsPage = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-4">
+        <div className="flex flex-row items-center gap-4 p-6 justify-between">
+            <h1 className="text-2xl font-bold text-gray-900">Habits</h1>
+            <button
+                type="button"
+                className="rounded-full bg-indigo-600 p-2 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer"
+            >
+                <PlusIcon aria-hidden="true" className="size-5" />
+            </button>
+        </div>
         {habits.map((habit) => (
             <Habits key={habit.id} title={habit.title} description={habit.description} />
         ))}

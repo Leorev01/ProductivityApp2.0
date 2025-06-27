@@ -1,10 +1,9 @@
-export default function Habit({title, description}: {title: string; description: string}) {
+export default function Habit({ title, description }: { title: string; description: string }) {
   return (
-    <div className="overflow-hidden rounded-lg bg-white shadow">
-      <div className="px-4 py-5 sm:px-6">
-        {title}
-      </div>
-      <div className="bg-gray-50 px-4 py-5 sm:p-6">{description}</div>
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md transition hover:shadow-xl">
+      <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+      
     </div>
-  )
+  );
 }
