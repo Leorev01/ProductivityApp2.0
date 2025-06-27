@@ -4,8 +4,17 @@ import { useState } from 'react';
 import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
-export default function Habit({ title, description }: { title: string; description: string }) {
+export default function Habit({ 
+  id, 
+  title, 
+  description 
+}: { 
+  id: number;
+  title: string; 
+  description: string; 
+}) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleDelete = () => {
@@ -20,12 +29,12 @@ export default function Habit({ title, description }: { title: string; descripti
         <div className="mb-2 flex items-center justify-between">
           <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
           <div className="flex gap-2">
-            <button
-              type="button"
+            <Link
+              href={`/dashboard/habits/edit/${id}`}
               className="inline-flex items-center gap-1 rounded-lg bg-blue-100 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-200 transition cursor-pointer"
             >
               <PencilIcon className="h-4 w-4" /> Edit
-            </button>
+            </Link>
             <button
               type="button"
               onClick={() => setShowDeleteModal(true)}
@@ -61,7 +70,7 @@ export default function Habit({ title, description }: { title: string; descripti
                   </DialogTitle>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Are you sure you want to delete &quot;{title}&quot;? This action cannot be undone.
+                      Are you sure you want to delete &quot;{title}&quot;?<br/> <strong>This action cannot be undone.</strong>
                     </p>
                   </div>
                 </div>
