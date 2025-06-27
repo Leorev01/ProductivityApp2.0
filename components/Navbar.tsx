@@ -13,7 +13,7 @@ export default function Navbar() {
     { name: 'Home', href: '/' },
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Team', href: '/team' },
-    { name: 'Calendar', href: '/calendar' },
+    { name: 'Calendar', href: '/dashboard/calendar' },
   ]
 
   const isActive = (href: string) => {
