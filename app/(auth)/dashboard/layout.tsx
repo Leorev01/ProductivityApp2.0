@@ -20,8 +20,6 @@ import {
   CalendarIcon,
   ChartPieIcon,
   Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
@@ -33,9 +31,7 @@ const navigation = [
   { name: 'Dashboard', icon: PresentationChartLineIcon, href: '/dashboard' },
   { name: 'Habits', icon: BellIcon, href: '/dashboard/habits' },
   { name: 'Friends', icon: UsersIcon, href: '/dashboard/friends' },
-  { name: 'Projects', icon: FolderIcon, href: '/dashboard/projects' },
   { name: 'Calendar', icon: CalendarIcon, href: '/dashboard/calendar' },
-  { name: 'Documents', icon: DocumentDuplicateIcon, href: '/dashboard/documents' },
   { name: 'Reports', icon: ChartPieIcon, href: '/dashboard/reports' },
 ]
 
