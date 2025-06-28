@@ -4,9 +4,13 @@ import { fileURLToPath } from "url"
 import { Request, Response } from "express"
 import {User} from "../models/user"
 
+//Get current file path and convert it to a file path
 const __filename = fileURLToPath(import.meta.url)
+
+//Get directory path of current file
 const __dirname = path.dirname(__filename)
 
+//Fetch User function
 const fetchUser = async (req: Request, res: Response) => {
     try{
         const filePath = path.join(__dirname, '../data/user.json')
