@@ -1,70 +1,125 @@
-# 📊 Productivity App 2.0
+# 📊 Productivity App
 
-A modern, responsive productivity application built with Next.js 15, TypeScript, and Tailwind CSS. Track your habits, manage tasks, and boost your productivity with an intuitive dashboard interface.
+A modern productivity application with separated frontend and backend architecture. Track your habits and boost your productivity with an intuitive dashboard interface.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.3.4-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-38B2AC)
 ![React](https://img.shields.io/badge/React-19-61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-20+-green)
+![Express](https://img.shields.io/badge/Express-5+-lightgrey)
+
+## 🏗️ Architecture
+
+This project consists of two separate applications:
+
+- **Frontend**: Next.js 15 application with React, TypeScript, and Tailwind CSS
+- **Backend**: Node.js API server with Express.js for email services only
+- **Data Storage**: JSON files with in-memory tracking (no database integration yet)
 
 ## ✨ Features
 
+### Current Features ✅
 - **📱 Responsive Design** - Seamless experience across desktop, tablet, and mobile devices
-- **🎯 Habit Tracking** - Create, edit, and track your daily habits
-- **📊 Dashboard Analytics** - Visual overview of your productivity metrics
+- **🎯 Habit Management UI** - View habits from JSON data source
+- **✏️ Habit CRUD UI** - Add, edit, and delete habit interfaces (UI only, no persistence)
+- **📊 Dashboard Overview** - Basic dashboard layout with placeholder widgets
 - **🔄 Real-time Navigation** - Dynamic navigation with active route highlighting
 - **🎨 Modern UI/UX** - Clean interface built with Headless UI components
-- **⚡ Fast Performance** - Optimized with Next.js 15 App Router
+- **⚡ Modal Interactions** - Delete confirmation and edit modals
+- **🔐 Authentication Pages** - Login and signup page layouts (UI only)
+- **📧 Email Service Backend** - Simple Express server for email functionality
+- **🏷️ Habit Completion Tracking** - In-memory tracking that resets on page refresh
+
+### Planned Features 🚧
+- [ ] **Persistent Data Storage** - Replace JSON/in-memory with database
+- [ ] **Backend API Integration** - Connect frontend habit management to backend
+- [ ] **JWT Authentication** - Secure session management
+- [ ] **Real Habit CRUD** - Actually persist habit changes
+- [ ] **Analytics Dashboard** - Habit statistics and progress charts
+- [ ] **Streak Tracking** - Long-term habit completion tracking
+- [ ] **Push Notifications** - Habit reminders
+- [ ] **Data Export/Import** - Backup and restore functionality
+- [ ] **Mobile App** - React Native companion
 
 ## 🚀 Tech Stack
 
-### Core Technologies
+### Frontend Technologies
 - **[Next.js 15](https://nextjs.org/)** - React framework with App Router
-- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
 - **[React 19](https://react.dev/)** - Latest React with concurrent features
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
 - **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS framework
-
-### UI Components & Icons
 - **[Headless UI](https://headlessui.dev/)** - Unstyled, accessible UI components
 - **[Heroicons](https://heroicons.com/)** - Beautiful hand-crafted SVG icons
 - **[Framer Motion](https://www.framer.com/motion/)** - Production-ready motion library
+
+### Backend Technologies
+- **[Node.js](https://nodejs.org/)** - JavaScript runtime
+- **[Express.js 5](https://expressjs.com/)** - Web application framework
+- **[CORS](https://github.com/expressjs/cors)** - Cross-origin resource sharing
+- **[dotenv](https://github.com/motdotla/dotenv)** - Environment variable management
+- **[Nodemon](https://nodemon.io/)** - Development auto-restart
 
 ### Development Tools
 - **ESLint** - Code linting and formatting
 - **PostCSS** - CSS processing and optimization
 
+### Data Storage
+- **JSON Files** - Static habit data stored in `frontend/utils/habits.json`
+- **In-Memory Tracking** - Daily completion tracking (resets on page refresh)
+- **No Database** - Currently no persistent backend storage
+
 ## 📁 Project Structure
 
 ```
 productivity-app/
-├── app/                          # Next.js App Router
-│   ├── (auth)/                   # Authenticated routes group
-│   │   └── dashboard/            # Dashboard section
-│   │       ├── layout.tsx        # Dashboard layout with sidebar
-│   │       ├── page.tsx          # Dashboard home page
-│   │       ├── habits/           # Habits management
-│   │       │   └── page.tsx      # Habits listing page
-│   │       └── components/       # Dashboard-specific components
-│   │           ├── Habit.tsx     # Individual habit card
-│   │           └── HabitsPage.tsx # Habits page container
-│   ├── layout.tsx                # Root layout
-│   ├── page.tsx                  # Landing page
-│   └── globals.css               # Global styles
-├── components/                   # Shared components
-│   ├── Navbar.tsx               # Main navigation
-│   └── Home/                    # Landing page components
-│       └── HeroSection.tsx      # Hero section component
-├── types/                       # TypeScript type definitions
-│   └── habit.ts                # Habit-related types
-└── utils/                       # Utility functions and data
-    └── storage.json             # Mock data storage
+├── frontend/                     # Next.js Frontend Application
+│   ├── app/                     # Next.js App Router
+│   │   ├── (auth)/              # Authenticated routes
+│   │   │   └── dashboard/       # Dashboard pages
+│   │   │       ├── habits/      # Habit management
+│   │   │       │   ├── add/     # Add habit page
+│   │   │       │   └── edit/    # Edit habit pages
+│   │   │       ├── calendar/    # Calendar page
+│   │   │       ├── layout.tsx   # Dashboard layout
+│   │   │       └── page.tsx     # Dashboard home
+│   │   ├── login/               # Login page
+│   │   ├── signup/              # Signup page
+│   │   ├── layout.tsx           # Root layout
+│   │   ├── page.tsx             # Landing page
+│   │   └── globals.css          # Global styles
+│   ├── components/              # Shared React components
+│   │   ├── Habits/              # Habit-related components
+│   │   │   ├── Habit.tsx        # Individual habit card
+│   │   │   └── HabitsPage.tsx   # Habits page container
+│   │   ├── Navbar.tsx           # Navigation component
+│   │   └── Home/                # Landing page components
+│   ├── types/                   # TypeScript definitions
+│   │   ├── habit.ts             # Habit type definitions
+│   │   └── types.ts             # General type definitions
+│   ├── utils/                   # Utility functions
+│   │   ├── habits.json          # Static habit data
+│   │   ├── habitFunctions.ts    # Habit manipulation functions
+│   │   ├── users.json           # Static user data
+│   │   └── userFunctions.ts     # User utility functions
+│   ├── public/                  # Static assets
+│   └── package.json             # Frontend dependencies
+├── backend/                      # Node.js Backend API
+│   ├── controllers/             # Business logic controllers
+│   │   └── emailController.js   # Email handling logic
+│   ├── routes/                  # API route definitions
+│   │   └── email.js             # Email endpoints
+│   ├── index.js                 # Main Express server
+│   └── package.json             # Backend dependencies
+├── .gitignore                   # Git ignore rules
+└── README.md                    # This documentation
 ```
 
 ## 🏃‍♂️ Getting Started
 
 ### Prerequisites
-
-Make sure you have Node.js 18+ installed on your machine.
+- **Node.js 18+** installed on your machine
+- **npm** or **yarn** package manager
 
 ### Installation
 
@@ -74,50 +129,111 @@ git clone <repository-url>
 cd productivity-app
 ```
 
-2. **Install dependencies**
+2. **Install dependencies for both frontend and backend**
+
+**Frontend:**
 ```bash
+cd frontend
 npm install
-# or
-yarn install
-# or
-pnpm install
 ```
 
-3. **Run the development server**
+**Backend:**
 ```bash
+cd ../backend
+npm install
+```
+
+3. **Run the applications**
+
+**Start the backend server (Terminal 1):**
+```bash
+cd backend
+node index.js
+# Backend will run on http://localhost:4000
+```
+
+**Start the frontend development server (Terminal 2):**
+```bash
+cd frontend
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+# Frontend will run on http://localhost:3000
 ```
 
 4. **Open your browser**
-Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+- **Frontend App**: http://localhost:3000
+- **Backend API**: http://localhost:4000
 
 ## 🎮 Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint for code quality
+### Frontend Scripts (`frontend/`)
+```bash
+npm run dev             # Development server (port 3000)
+npm run build           # Production build
+npm run start           # Production server
+npm run lint            # Code linting
+```
+
+### Backend Scripts (`backend/`)
+```bash
+node index.js           # Start server (port 4000)
+# Note: No dev script configured yet
+```
+
+## 🔌 API Documentation
+
+### Email Endpoints
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/send-email` | Send email with habit data |
+
+### Sample API Request
+
+**Send email:**
+```bash
+curl -X POST http://localhost:4000/api/send-email \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "habits": ["Exercise", "Meditation"]
+  }'
+```
+
+**Response:**
+```json
+{
+  "success": true
+}
+```
+
+**Note:** The email functionality is currently a placeholder and logs to console only.
 
 ## 🏗️ Architecture Highlights
 
-### Layout System
-- **Nested Layouts**: Dashboard pages share a common sidebar layout
+### Frontend-Backend Separation
+- **Frontend**: Complete Next.js application with habit UI components
+- **Backend**: Simple Express.js server providing email services only
+- **Data Flow**: Frontend reads from JSON files, no backend integration for habits yet
+
+### Frontend Architecture
+- **App Router**: Next.js 15 with modern App Router structure
 - **Route Groups**: Organized with `(auth)` route grouping for authenticated sections
-- **Dynamic Navigation**: Active route detection with `usePathname()`
+- **JSON Data Source**: Habits loaded from `utils/habits.json`
+- **In-Memory State**: Daily completion tracking (temporary, resets on refresh)
+- **UI Components**: Modal-based CRUD operations (edit/delete modals)
+
+### Backend Architecture
+- **Minimal API**: Single email endpoint for demonstration
+- **CORS Enabled**: Ready for frontend integration
+- **ES6 Modules**: Using `require()` syntax (not ES modules yet)
 
 ### Component Architecture
-- **Separation of Concerns**: Layout, business logic, and presentation components are separated
-- **Reusable Components**: Modular components for habits, navigation, and UI elements
-- **TypeScript Integration**: Full type safety across components and data structures
+- **Separation of Concerns**: Layout, business logic, and presentation components
+- **Reusable Components**: Modular habit cards and navigation
+- **TypeScript Integration**: Full type safety across components
+- **Headless UI**: Accessible modal dialogs and UI components
 
-### Styling Approach
-- **Utility-First**: Tailwind CSS for rapid UI development
-- **Component-Level Styles**: Scoped styling with CSS modules where needed
-- **Responsive Design**: Mobile-first responsive breakpoints
+### Data Storage
+Currently using **JSON files** with in-memory tracking for development. The habits are loaded from `frontend/utils/habits.json` and daily completions are tracked in memory (resets on page refresh). In the future, this will be replaced with a proper database and backend API integration.
 
 ## 🔄 Navigation Flow
 
@@ -126,59 +242,144 @@ Landing Page (/)
 └── Dashboard (/dashboard)
     ├── Dashboard Home
     ├── Habits (/dashboard/habits)
-    ├── Team (/dashboard/team)
-    ├── Projects (/dashboard/projects)
-    ├── Calendar (/dashboard/calendar)
-    ├── Documents (/dashboard/documents)
-    └── Reports (/dashboard/reports)
+    │   ├── Add Habit (/dashboard/habits/add)
+    │   └── Edit Habit (/dashboard/habits/edit/[id])
+    └── Calendar (/dashboard/calendar)
 ```
 
 ## 🎯 Key Features Breakdown
 
+### Current Implementation
+- **JSON Data Source**: Habits are loaded from static JSON file
+- **UI-Only CRUD**: Add, edit, delete interfaces without persistence
+- **In-Memory Tracking**: Daily completion tracking (temporary)
+- **Modal Interactions**: Delete confirmations and edit forms
+- **Responsive Design**: Mobile-friendly layout with Tailwind CSS
+
 ### Dashboard Layout
-- **Responsive Sidebar**: Collapsible navigation with mobile support
-- **Persistent State**: Layout state maintained across route changes
-- **Active Navigation**: Visual indicators for current page/section
+- **Dashboard Overview**: Basic layout with placeholder widgets
+- **Habits Management**: List view with edit/delete actions
+- **Navigation**: Simple sidebar navigation (not yet implemented)
 
 ### Habit Management
-- **CRUD Operations**: Create, read, update, and delete habits
-- **Visual Cards**: Clean card-based interface for habit display
-- **Action Buttons**: Quick access to edit and delete functions
+- **View Habits**: Display habits from JSON data
+- **Modal Dialogs**: Edit and delete confirmation modals
+- **Completion Toggle**: In-memory tracking of daily completions
+- **Type Safety**: Full TypeScript definitions for habit data
 
-### Modern UI Components
-- **Headless UI Integration**: Accessible dropdowns, dialogs, and menus
-- **Icon System**: Consistent iconography with Heroicons
-- **Animation Ready**: Framer Motion integration for smooth transitions
+### Backend Services
+- **Email API**: Simple endpoint for sending emails (placeholder)
+- **CORS Support**: Configured for frontend integration
+- **Express Server**: Basic REST API structure ready for expansion
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
+### Frontend (Next.js)
 ```bash
+cd frontend
 npm run build
+npm run start
 ```
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Backend (Express)
+```bash
+cd backend
+node index.js
+```
+
+For production deployment, consider:
+- **Vercel** for frontend (Next.js)
+- **Railway**, **Heroku**, or **DigitalOcean** for backend
+- **MongoDB Atlas** or **PostgreSQL** for future database needs
+
+### Environment Variables
+Currently no environment variables are required, but for future expansion:
+
+**Frontend:**
+```bash
+NEXT_PUBLIC_API_URL=https://your-backend-url.com/api
+```
+
+**Backend:**
+```bash
+PORT=4000
+NODE_ENV=production
+```
 
 ## 🔮 Future Enhancements
 
-- [ ] **User Authentication** - Implement auth with NextAuth.js
-- [ ] **Data Persistence** - Connect to database (PostgreSQL/MongoDB)
-- [ ] **Analytics Dashboard** - Add charts and progress tracking
-- [ ] **Task Management** - Expand beyond habits to include tasks
-- [ ] **Calendar Integration** - Full calendar view with scheduling
-- [ ] **Team Collaboration** - Multi-user functionality
+- [ ] **Database Integration** - MongoDB/PostgreSQL for data persistence
+- [ ] **Backend API Integration** - Connect frontend habit management to backend
+- [ ] **Real Habit CRUD** - Actually persist habit changes to database
+- [ ] **JWT Authentication** - Secure session management with refresh tokens
+- [ ] **User Profiles** - Individual user accounts and data isolation
+- [ ] **Streak Tracking** - Long-term habit completion tracking with persistence
+- [ ] **Analytics Dashboard** - Habit statistics and progress charts
+- [ ] **Notification System** - Push notifications for habit reminders
+- [ ] **Data Export/Import** - Backup and restore functionality
+- [ ] **Team Collaboration** - Multi-user functionality and sharing
 - [ ] **Mobile App** - React Native companion app
-- [ ] **Notifications** - Push notifications for habit reminders
+- [ ] **Advanced Filtering** - Search and filter habits by various criteria
+- [ ] **Habit Templates** - Pre-built habit templates for common goals
+- [ ] **Calendar Integration** - Full calendar view with scheduling
+- [ ] **Progress Photos** - Visual progress tracking with image uploads
+- [ ] **Email Integration** - Complete the email service functionality
+
+## 🛠️ Development
+
+### Development Workflow
+
+1. **Start backend server** with `cd backend && node index.js` (port 4000)
+2. **Start frontend server** with `cd frontend && npm run dev` (port 3000)
+3. **Frontend** automatically reloads on file changes
+4. **Backend** requires manual restart on changes (no nodemon configured yet)
+5. **Data** is currently loaded from JSON files, no API integration yet
+
+### Key Development Files
+
+**Frontend:**
+- `frontend/utils/habitFunctions.ts` - Habit data manipulation
+- `frontend/types/habit.ts` - TypeScript type definitions
+- `frontend/components/Habits/` - Habit management components
+- `frontend/utils/habits.json` - Static habit data
+
+**Backend:**
+- `backend/index.js` - Express app configuration
+- `backend/controllers/emailController.js` - Email handling logic
+- `backend/routes/email.js` - Email API endpoint
+
+### Current Limitations
+
+- **No Persistence**: Habit changes are not saved
+- **In-Memory Only**: Daily completions reset on page refresh
+- **No Backend Integration**: Frontend and backend are not connected
+- **No Authentication**: Login/signup pages are UI only
+- **Static Data**: All habit data comes from JSON files
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+3. Make your changes in the appropriate frontend or backend directory
+4. Test both frontend functionality and backend endpoints separately
+5. Commit your changes (`git commit -m 'Add some amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+### Development Guidelines
+- Follow TypeScript best practices in the frontend
+- Maintain the current separation between frontend and backend
+- Add proper error handling for both client and server
+- Update documentation for new features
+- Consider data persistence when adding new features
+- Test thoroughly before submitting PRs
+
+### Priority Areas for Contribution
+1. **Database Integration** - Add persistent storage
+2. **API Development** - Create habit CRUD endpoints in backend
+3. **Frontend-Backend Integration** - Connect the two applications
+4. **Authentication System** - Implement real user management
+5. **UI/UX Improvements** - Enhance the current interface
 
 ## 📄 License
 
@@ -190,4 +391,6 @@ If you have any questions or run into issues, please open an issue on GitHub or 
 
 ---
 
-Built with ❤️ using Next.js and modern web technologies.
+**Current Status**: This is a development version with separated frontend and backend. The frontend displays habit data from JSON files with basic UI interactions, while the backend provides a simple email service. Full integration and database persistence are planned for future releases.
+
+Built with ❤️ using modern web technologies.
