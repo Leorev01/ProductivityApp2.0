@@ -3,10 +3,13 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import {Request, Response} from "express"
 
-// Get __dirname equivalent for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+//Get current file path and convert it to a file path
+const __filename = fileURLToPath(import.meta.url)
 
+//Get directory path of current file
+const __dirname = path.dirname(__filename)
+
+//Fetch Habits function
 const fetchHabits = async (req: Request, res: Response) => {
     try{
         const filePath = path.join(__dirname, '../data/habits.json');

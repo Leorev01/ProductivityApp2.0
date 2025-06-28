@@ -1,7 +1,10 @@
 import express from "express";
 import {fetchHabits} from "../controllers/habitController.js";
 
+//Create router
 const router = express.Router();
+
+// Create Routes
 
 // GET /api/habits - Get all habits
 router.get("/", fetchHabits);

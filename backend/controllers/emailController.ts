@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 
+//Send email function
 const sendEmail = async (req: Request, res: Response) => {
   const { email, habits } = req.body;
   try{
