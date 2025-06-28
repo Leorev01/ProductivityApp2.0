@@ -125,7 +125,7 @@ productivity-app/
 
 1. **Clone the repository**
 ```bash
-git clone <repository-url>
+git clone https://github.com/Leorev01/ProductivityApp2.0
 cd productivity-app
 ```
 
