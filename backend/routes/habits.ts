@@ -1,5 +1,5 @@
 import express from "express";
-import fetchHabits from "../controllers/habitController.js";
+import {fetchHabits} from "../controllers/habitController.js";
 
 const router = express.Router();
 
