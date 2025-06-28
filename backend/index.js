@@ -1,6 +1,7 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const emailRoutes = require('./routes/email');
 
 dotenv.config();
 const app = express();
@@ -8,15 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Sample route
-app.post('/api/send-email', (req, res) => {
-  const { email, habits } = req.body;
-  // TODO: Implement email sending logic here
-  console.log('Sending email to:', email, 'with habits:', habits);
-  res.json({ success: true });
-});
+app.use('/api', emailRoutes); // Mounts all routes from /routes/email.js
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`Backend running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
