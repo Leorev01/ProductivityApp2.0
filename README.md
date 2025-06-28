@@ -1,6 +1,6 @@
 # 📊 Productivity App
 
-A modern productivity application with separated frontend and backend architecture. Track your habits and boost your productivity with an intuitive dashboard interface.
+A modern productivity application with separated frontend and backend architecture. Track your habits, boost your productivity, and compete with friends through gamification features.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.3.4-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
@@ -8,39 +8,67 @@ A modern productivity application with separated frontend and backend architectu
 ![React](https://img.shields.io/badge/React-19-61DAFB)
 ![Node.js](https://img.shields.io/badge/Node.js-20+-green)
 ![Express](https://img.shields.io/badge/Express-5+-lightgrey)
+![JWT](https://img.shields.io/badge/JWT-Auth-orange)
+![bcrypt](https://img.shields.io/badge/bcrypt-Security-red)
 
 ## 🏗️ Architecture
 
 This project consists of two separate applications:
 
 - **Frontend**: Next.js 15 application with React, TypeScript, and Tailwind CSS
-- **Backend**: Node.js API server with Express.js for email and habit management
-- **Data Storage**: JSON files in backend with API integration (transitioning from frontend JSON)
+- **Backend**: Node.js API server with Express.js for authentication, habit management, and gamification
+- **Data Storage**: JSON files in backend with API integration (transitioning to database)
+- **Authentication**: JWT-based user authentication with bcrypt password hashing
 
 ## ✨ Features
 
 ### Current Features ✅
 - **📱 Responsive Design** - Seamless experience across desktop, tablet, and mobile devices
-- **🎯 Habit Management UI** - View habits from JSON data source
-- **✏️ Habit CRUD UI** - Add, edit, and delete habit interfaces (UI only, no persistence)
+- **🎯 Habit Management UI** - View habits from backend API
+- **✏️ Habit CRUD UI** - Add, edit, and delete habit interfaces with backend integration
 - **📊 Dashboard Overview** - Basic dashboard layout with placeholder widgets
 - **🔄 Real-time Navigation** - Dynamic navigation with active route highlighting
 - **🎨 Modern UI/UX** - Clean interface built with Headless UI components
 - **⚡ Modal Interactions** - Delete confirmation and edit modals
-- **🔐 Authentication Pages** - Login and signup page layouts (UI only)
-- **📧 Email Service Backend** - Simple Express server for email functionality
+- **🔐 User Authentication** - Registration, login with JWT tokens and password hashing
+- **📧 Email Service Backend** - Express server for email functionality
 - **🏷️ Habit Completion Tracking** - In-memory tracking that resets on page refresh
+- **🎮 Gamification Foundation** - User scoring system for habit completion tracking
 
 ### Planned Features 🚧
-- [ ] **Persistent Data Storage** - Replace JSON/in-memory with database
-- [ ] **Backend API Integration** - Connect frontend habit management to backend
-- [ ] **JWT Authentication** - Secure session management
-- [ ] **Real Habit CRUD** - Actually persist habit changes
-- [ ] **Analytics Dashboard** - Habit statistics and progress charts
-- [ ] **Streak Tracking** - Long-term habit completion tracking
-- [ ] **Push Notifications** - Habit reminders
-- [ ] **Data Export/Import** - Backup and restore functionality
-- [ ] **Mobile App** - React Native companion
+- [ ] **🏆 Competitive Leaderboards** - Compare productivity scores with friends and global users
+- [ ] **🔥 Streak Tracking** - Long-term habit completion streaks with visual indicators
+- [ ] **📈 Productivity Scoring** - Points-based system for habit completion and consistency
+- [ ] **👥 Friend System** - Add friends and compete in productivity challenges
+- [ ] **🎖️ Achievement Badges** - Unlock badges for milestones and consistent habits
+- [ ] **📊 Analytics Dashboard** - Habit statistics, progress charts, and productivity insights
+- [ ] **🎯 Challenges & Goals** - Create and join productivity challenges with friends
+- [ ] **📱 Push Notifications** - Habit reminders and friend activity updates
+- [ ] **💾 Database Integration** - Replace JSON files with PostgreSQL/MongoDB
+- [ ] **📤 Data Export/Import** - Backup and restore functionality
+- [ ] **📱 Mobile App** - React Native companion with full gamification
+
+## 🎮 Gamification System
+
+### Scoring Mechanics
+- **Daily Completion**: +10 points per habit completed
+- **Streak Bonuses**: +5 extra points for each day in streak (max +50/day)
+- **Perfect Days**: +25 bonus points for completing all habits
+- **Weekly Challenges**: +100 points for weekly goal completion
+- **Monthly Milestones**: +500 points for consistency achievements
+
+### Social Features
+- **Friend Leaderboards**: See how you rank against your friends
+- **Global Rankings**: Compete with users worldwide
+- **Achievement Sharing**: Share badges and milestones on social media
+- **Group Challenges**: Team up with friends for group productivity goals
+- **Progress Comparison**: Visual charts comparing your progress with friends
+
+### Engagement Features
+- **Daily Streaks**: Visual streak counters with fire emojis 🔥
+- **Level System**: Progress through productivity levels (Beginner → Expert → Master)
+- **Seasonal Events**: Special challenges during holidays and events
+- **Productivity Insights**: Weekly reports showing improvement areas
 
 ## 🚀 Tech Stack
 
@@ -56,6 +84,8 @@ This project consists of two separate applications:
 ### Backend Technologies
 - **[Node.js](https://nodejs.org/)** - JavaScript runtime
 - **[Express.js 5](https://expressjs.com/)** - Web application framework
+- **[JWT](https://jwt.io/)** - JSON Web Tokens for authentication
+- **[bcrypt](https://github.com/kelektiv/node.bcrypt.js)** - Password hashing and security
 - **[CORS](https://github.com/expressjs/cors)** - Cross-origin resource sharing
 - **[dotenv](https://github.com/motdotla/dotenv)** - Environment variable management
 - **[Nodemon](https://nodemon.io/)** - Development auto-restart
@@ -65,11 +95,11 @@ This project consists of two separate applications:
 - **PostCSS** - CSS processing and optimization
 
 ### Data Storage
-- **Backend JSON Storage** - Habit data stored in `backend/data/habits.json`
-- **Frontend API Integration** - Frontend fetches data from backend API
-- **Legacy JSON Files** - `frontend/utils/habits.json` (being phased out)
-- **In-Memory Tracking** - Daily completion tracking (resets on page refresh)
-- **No Database** - Transitioning from JSON files to future database integration
+- **Backend JSON Storage** - User and habit data stored in `backend/data/`
+- **Frontend API Integration** - Frontend communicates with backend API
+- **JWT Authentication** - Secure user sessions with token-based auth
+- **Password Security** - bcrypt hashing for user passwords
+- **Future Database** - Planned migration to PostgreSQL/MongoDB
 
 ## 📁 Project Structure
 
@@ -83,6 +113,7 @@ productivity-app/
 │   │   │       │   ├── add/     # Add habit page
 │   │   │       │   └── edit/    # Edit habit pages
 │   │   │       ├── calendar/    # Calendar page
+│   │   │       ├── leaderboard/ # Friend rankings (planned)
 │   │   │       ├── layout.tsx   # Dashboard layout
 │   │   │       └── page.tsx     # Dashboard home
 │   │   ├── login/               # Login page
@@ -94,30 +125,44 @@ productivity-app/
 │   │   ├── Habits/              # Habit-related components
 │   │   │   ├── Habit.tsx        # Individual habit card
 │   │   │   └── HabitsPage.tsx   # Habits page container
+│   │   ├── Gamification/        # Gamification components (planned)
+│   │   │   ├── Leaderboard.tsx  # Friend rankings
+│   │   │   ├── ScoreDisplay.tsx # User score widget
+│   │   │   └── StreakCounter.tsx# Streak visualization
 │   │   ├── Navbar.tsx           # Navigation component
 │   │   └── Home/                # Landing page components
 │   ├── types/                   # TypeScript definitions
 │   │   ├── habit.ts             # Habit type definitions
+│   │   ├── user.ts              # User and auth types
 │   │   └── types.ts             # General type definitions
 │   ├── utils/                   # Utility functions
 │   │   ├── habits.json          # Static habit data (legacy)
 │   │   ├── habitFunctions.ts    # Habit manipulation functions
-│   │   ├── users.json           # Static user data
-│   │   └── userFunctions.ts     # User utility functions
+│   │   ├── users.json           # Static user data (legacy)
+│   │   ├── userFunctions.ts     # User utility functions
+│   │   └── auth.ts              # Authentication helpers
 │   ├── public/                  # Static assets
 │   └── package.json             # Frontend dependencies
 ├── backend/                      # Node.js Backend API
 │   ├── controllers/             # Business logic controllers
-│   │   ├── emailController.js   # Email handling logic
-│   │   └── habitController.js   # Habit CRUD operations
+│   │   ├── authController.ts    # User registration and login
+│   │   ├── userController.ts    # User profile management
+│   │   ├── emailController.ts   # Email handling logic
+│   │   └── habitController.ts   # Habit CRUD operations
 │   ├── routes/                  # API route definitions
-│   │   ├── email.js             # Email endpoints
-│   │   ├── habits.js            # Habit endpoints
-│   │   └── auth.js              # Auth endpoints
+│   │   ├── auth.ts              # Authentication endpoints
+│   │   ├── users.ts             # User management endpoints
+│   │   ├── email.ts             # Email endpoints
+│   │   └── habits.ts            # Habit endpoints
+│   ├── models/                  # Data models and types
+│   │   ├── User.ts              # User interface definitions
+│   │   └── Habit.ts             # Habit interface definitions
 │   ├── data/                    # JSON data storage
+│   │   ├── users.json           # User data with scores and streaks
 │   │   └── habits.json          # Habit data persistence
-│   ├── index.js                 # Main Express server
+│   ├── index.ts                 # Main Express server
 │   └── package.json             # Backend dependencies
+├── issue.md                     # Development task tracking
 ├── .gitignore                   # Git ignore rules
 └── README.md                    # This documentation
 ```
@@ -150,12 +195,22 @@ cd ../backend
 npm install
 ```
 
-3. **Run the applications**
+3. **Set up environment variables**
+
+**Backend (.env file):**
+```bash
+# Create backend/.env
+PORT=4000
+JWT_SECRET=your-super-secret-jwt-key-here
+NODE_ENV=development
+```
+
+4. **Run the applications**
 
 **Start the backend server (Terminal 1):**
 ```bash
 cd backend
-node index.js
+node index.ts
 # Backend will run on http://localhost:4000
 ```
 
@@ -166,7 +221,7 @@ npm run dev
 # Frontend will run on http://localhost:3000
 ```
 
-4. **Open your browser**
+5. **Open your browser**
 - **Frontend App**: http://localhost:3000
 - **Backend API**: http://localhost:4000
 
@@ -182,11 +237,24 @@ npm run lint            # Code linting
 
 ### Backend Scripts (`backend/`)
 ```bash
-node index.js           # Start server (port 4000)
+node index.ts           # Start server (port 4000)
 # Note: No dev script configured yet
 ```
 
 ## 🔌 API Documentation
+
+### Authentication Endpoints
+| Method | Endpoint | Description | Status |
+|--------|----------|-------------|---------|
+| `POST` | `/api/auth/register` | Register new user | ✅ Implemented |
+| `POST` | `/api/auth/login` | User login with JWT | ✅ Implemented |
+
+### User Endpoints
+| Method | Endpoint | Description | Status |
+|--------|----------|-------------|---------|
+| `GET` | `/api/users/profile` | Get user profile | ✅ Implemented |
+| `PUT` | `/api/users/profile` | Update user profile | 🚧 In Progress |
+| `GET` | `/api/users/leaderboard` | Get friend rankings | 🚧 Planned |
 
 ### Habit Endpoints
 | Method | Endpoint | Description | Status |
@@ -199,123 +267,122 @@ node index.js           # Start server (port 4000)
 ### Email Endpoints
 | Method | Endpoint | Description | Status |
 |--------|----------|-------------|---------|
-| `POST` | `/api/send-email` | Send email with habit data | ✅ Implemented |
+| `POST` | `/api/email/send-email` | Send email with habit data | ✅ Implemented |
 
 ### Sample API Requests
 
-**Get all habits:**
+**Register user:**
 ```bash
-curl -X GET http://localhost:4000/api/habits
-```
-
-**Send email:**
-```bash
-curl -X POST http://localhost:4000/api/send-email \
+curl -X POST http://localhost:4000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
-    "habits": ["Exercise", "Meditation"]
+    "password": "securepassword123"
   }'
 ```
 
-**Response:**
+**Login user:**
+```bash
+curl -X POST http://localhost:4000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "securepassword123"
+  }'
+```
+
+**Get habits (authenticated):**
+```bash
+curl -X GET http://localhost:4000/api/habits \
+  -H "Authorization: Bearer your-jwt-token-here"
+```
+
+**Response Examples:**
 ```json
+// Registration/Login Success
 {
-  "success": true,
-  "message": "Email sent successfully"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": 1,
+    "email": "user@example.com"
+  }
+}
+
+// Habits Response
+{
+  "habits": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Morning Exercise",
+      "description": "30 minutes of cardio",
+      "createdAt": "2025-01-01"
+    }
+  ]
 }
 ```
 
-**Note:** The email functionality is currently a placeholder and logs to console only.
-
 ## 🏗️ Architecture Highlights
 
-### Frontend-Backend Separation
-- **Frontend**: Complete Next.js application with habit UI components
-- **Backend**: Express.js server providing email services and habit API endpoints
-- **Data Flow**: Frontend fetches habits from backend API (`/api/habits`)
+### Frontend-Backend Integration
+- **Complete Separation**: Frontend and backend are independent applications
+- **JWT Authentication**: Secure token-based authentication system
+- **API Communication**: Frontend calls backend REST API endpoints
+- **Real-time Updates**: Planned WebSocket integration for live leaderboards
 
-### Frontend Architecture
-- **App Router**: Next.js 15 with modern App Router structure
-- **Route Groups**: Organized with `(auth)` route grouping for authenticated sections
-- **API Integration**: Frontend calls backend endpoints for habit data
-- **In-Memory State**: Daily completion tracking (temporary, resets on refresh)
-- **UI Components**: Modal-based CRUD operations (edit/delete modals)
+### Security Features
+- **Password Hashing**: bcrypt with salt rounds for secure password storage
+- **JWT Tokens**: Secure session management with expiration
+- **Input Validation**: Server-side validation for all user inputs
+- **CORS Protection**: Configured for secure cross-origin requests
 
-### Backend Architecture
-- **REST API**: Habit and email endpoints with proper HTTP methods
-- **JSON Storage**: File-based data persistence in `backend/data/habits.json`
-- **ES Modules**: Using modern ES6 import/export syntax
-- **CORS Enabled**: Ready for frontend integration
+### Gamification Architecture
+- **User Scoring System**: Points tracked per user with daily/weekly calculations
+- **Streak Tracking**: Consecutive day counters for habit completion
+- **Social Features**: Friend relationships and competitive leaderboards
+- **Achievement System**: Badge unlocking based on user milestones
 
-### Component Architecture
-- **Separation of Concerns**: Layout, business logic, and presentation components
-- **Reusable Components**: Modular habit cards and navigation
-- **TypeScript Integration**: Full type safety across components
-- **Headless UI**: Accessible modal dialogs and UI components
-
-### Data Storage
-Currently using **JSON files** with in-memory tracking for development. The habits are loaded from `frontend/utils/habits.json` and daily completions are tracked in memory (resets on page refresh). In the future, this will be replaced with a proper database and backend API integration.
-
-## 🔄 Navigation Flow
-
+### Data Flow
 ```
-Landing Page (/)
-└── Dashboard (/dashboard)
-    ├── Dashboard Home
-    ├── Habits (/dashboard/habits)
-    │   ├── Add Habit (/dashboard/habits/add)
-    │   └── Edit Habit (/dashboard/habits/edit/[id])
-    └── Calendar (/dashboard/calendar)
+Frontend (React) ↔ Backend API (Express) ↔ JSON Storage → Future Database
+                    ↓
+               JWT Authentication
+                    ↓
+              Gamification Engine
 ```
 
-## 🎯 Key Features Breakdown
+## 🎯 Gamification Features in Detail
 
-### Current Implementation
-- **JSON Data Source**: Habits are loaded from static JSON file
-- **UI-Only CRUD**: Add, edit, delete interfaces without persistence
-- **In-Memory Tracking**: Daily completion tracking (temporary)
-- **Modal Interactions**: Delete confirmations and edit forms
-- **Responsive Design**: Mobile-friendly layout with Tailwind CSS
+### Scoring System
+```typescript
+interface UserScore {
+  userId: number;
+  totalPoints: number;
+  dailyPoints: number;
+  weeklyPoints: number;
+  currentStreak: number;
+  longestStreak: number;
+  level: number;
+  badges: Badge[];
+}
+```
 
-### Dashboard Layout
-- **Dashboard Overview**: Basic layout with placeholder widgets
-- **Habits Management**: List view with edit/delete actions
-- **Navigation**: Simple sidebar navigation (not yet implemented)
+### Achievement Badges
+- **🔥 Streak Master**: 30-day habit streak
+- **⭐ Perfect Week**: Complete all habits for 7 days
+- **🚀 Quick Starter**: Complete habits for first 7 days
+- **💪 Consistency Champion**: 90% habit completion over 30 days
+- **🏆 Leaderboard Leader**: Top 10 in weekly rankings
 
-### Habit Management
-- **View Habits**: Display habits from JSON data
-- **Modal Dialogs**: Edit and delete confirmation modals
-- **Completion Toggle**: In-memory tracking of daily completions
-- **Type Safety**: Full TypeScript definitions for habit data
-
-### Backend Services
-- **Email API**: Simple endpoint for sending emails (placeholder)
-- **CORS Support**: Configured for frontend integration
-- **Express Server**: Basic REST API structure ready for expansion
+### Competitive Features
+- **Daily Challenges**: Complete specific habit combinations
+- **Weekly Competitions**: Compete with friends on weekly scores
+- **Seasonal Events**: Special challenges during holidays
+- **Team Challenges**: Group competitions with shared goals
 
 ## 🚀 Deployment
 
-### Frontend (Next.js)
-```bash
-cd frontend
-npm run build
-npm run start
-```
-
-### Backend (Express)
-```bash
-cd backend
-node index.js
-```
-
-For production deployment, consider:
-- **Vercel** for frontend (Next.js)
-- **Railway**, **Heroku**, or **DigitalOcean** for backend
-- **MongoDB Atlas** or **PostgreSQL** for future database needs
-
 ### Environment Variables
-Currently no environment variables are required, but for future expansion:
 
 **Frontend:**
 ```bash
@@ -326,81 +393,94 @@ NEXT_PUBLIC_API_URL=https://your-backend-url.com/api
 ```bash
 PORT=4000
 NODE_ENV=production
+JWT_SECRET=your-production-jwt-secret
+DATABASE_URL=your-database-connection-string
 ```
+
+### Production Deployment
+- **Frontend**: Vercel (recommended for Next.js)
+- **Backend**: Railway, Heroku, or DigitalOcean
+- **Database**: PostgreSQL (recommended for production)
+- **File Storage**: AWS S3 for user-uploaded content
 
 ## 🔮 Future Enhancements
 
-- [ ] **Database Integration** - MongoDB/PostgreSQL for data persistence
-- [ ] **Backend API Integration** - Connect frontend habit management to backend
-- [ ] **Real Habit CRUD** - Actually persist habit changes to database
-- [ ] **JWT Authentication** - Secure session management with refresh tokens
-- [ ] **User Profiles** - Individual user accounts and data isolation
-- [ ] **Streak Tracking** - Long-term habit completion tracking with persistence
-- [ ] **Analytics Dashboard** - Habit statistics and progress charts
-- [ ] **Notification System** - Push notifications for habit reminders
-- [ ] **Data Export/Import** - Backup and restore functionality
-- [ ] **Team Collaboration** - Multi-user functionality and sharing
-- [ ] **Mobile App** - React Native companion app
-- [ ] **Advanced Filtering** - Search and filter habits by various criteria
-- [ ] **Habit Templates** - Pre-built habit templates for common goals
-- [ ] **Calendar Integration** - Full calendar view with scheduling
+### Core Features
+- [ ] **PostgreSQL Integration** - Replace JSON files with proper database
+- [ ] **Real-time WebSockets** - Live leaderboard updates and friend activity
+- [ ] **Advanced Analytics** - Detailed productivity insights and trends
+- [ ] **Mobile Push Notifications** - Habit reminders and social updates
+
+### Gamification Expansion
+- [ ] **Guild System** - Create and join productivity communities
+- [ ] **Seasonal Championships** - Monthly and yearly competitions
+- [ ] **Custom Challenges** - User-created challenge templates
+- [ ] **Reward Store** - Spend points on virtual rewards and real-world prizes
+- [ ] **Social Feed** - Activity streams showing friend achievements
+- [ ] **Mentorship Program** - Connect experienced users with beginners
+
+### Advanced Features
+- [ ] **AI Habit Recommendations** - Machine learning for personalized suggestions
+- [ ] **Integration APIs** - Connect with fitness trackers and other apps
+- [ ] **Habit Templates** - Pre-built habit sets for common goals
 - [ ] **Progress Photos** - Visual progress tracking with image uploads
-- [ ] **Email Integration** - Complete the email service functionality
+- [ ] **Calendar Integration** - Sync with Google Calendar and other services
+- [ ] **Data Analytics** - Advanced reporting and trend analysis
 
 ## 🛠️ Development
 
 ### Development Workflow
 
-1. **Start backend server** with `cd backend && node index.js` (port 4000)
+1. **Start backend server** with `cd backend && node index.ts` (port 4000)
 2. **Start frontend server** with `cd frontend && npm run dev` (port 3000)
 3. **Frontend** automatically reloads on file changes
-4. **Backend** requires manual restart on changes (no nodemon configured yet)
-5. **Data** is currently loaded from JSON files, no API integration yet
+4. **Backend** requires manual restart on changes (TypeScript compilation)
+5. **Authentication** fully functional with registration and login
 
-### Key Development Files
+### Current Implementation Status
 
-**Frontend:**
-- `frontend/utils/habitFunctions.ts` - Habit data manipulation
-- `frontend/types/habit.ts` - TypeScript type definitions
-- `frontend/components/Habits/` - Habit management components
-- `frontend/utils/habits.json` - Static habit data
+**✅ Completed:**
+- User registration and login with JWT
+- Password hashing with bcrypt
+- Basic habit management UI
+- Backend API structure
+- Frontend-backend communication
 
-**Backend:**
-- `backend/index.js` - Express app configuration
-- `backend/controllers/emailController.js` - Email handling logic
-- `backend/routes/email.js` - Email API endpoint
+**🚧 In Progress:**
+- Complete habit CRUD operations
+- User profile management
+- Frontend authentication integration
 
-### Current Limitations
-
-- **Partial Backend Integration**: GET habits works, but POST/PUT/DELETE not yet implemented
-- **In-Memory Only**: Daily completions reset on page refresh
-- **Limited Authentication**: Login/signup pages are UI only
-- **Transitioning Architecture**: Moving from frontend JSON to backend API storage
+**📋 Planned:**
+- Friend system and social features
+- Leaderboards and scoring system
+- Achievement badges
+- Database migration
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes in the appropriate frontend or backend directory
-4. Test both frontend functionality and backend endpoints separately
-5. Commit your changes (`git commit -m 'Add some amazing feature'`)
-6. Push to the branch (`git push origin feature/amazing-feature`)
-7. Open a Pull Request
+### Priority Development Areas
+
+1. **Gamification System** - Implement scoring, streaks, and achievements
+2. **Friend System** - Social features and friend management
+3. **Database Migration** - Move from JSON to PostgreSQL/MongoDB
+4. **Mobile App** - React Native companion app
+5. **Real-time Features** - WebSocket integration for live updates
 
 ### Development Guidelines
-- Follow TypeScript best practices in the frontend
-- Maintain the current separation between frontend and backend
-- Add proper error handling for both client and server
+- Follow TypeScript best practices
+- Implement proper error handling
+- Add comprehensive testing
+- Maintain security best practices
 - Update documentation for new features
-- Consider data persistence when adding new features
-- Test thoroughly before submitting PRs
+- Consider scalability in architecture decisions
 
-### Priority Areas for Contribution
-1. **Database Integration** - Add persistent storage
-2. **API Development** - Create habit CRUD endpoints in backend
-3. **Frontend-Backend Integration** - Connect the two applications
-4. **Authentication System** - Implement real user management
-5. **UI/UX Improvements** - Enhance the current interface
+### Getting Involved
+1. **Backend Development** - API endpoints and business logic
+2. **Frontend Development** - React components and UI/UX
+3. **Gamification Design** - Scoring systems and achievement mechanics
+4. **Mobile Development** - React Native app development
+5. **DevOps** - Deployment and infrastructure setup
 
 ## 📄 License
 
@@ -408,10 +488,13 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 📞 Support
 
-If you have any questions or run into issues, please open an issue on GitHub or reach out to the development team.
+If you have any questions or run into issues:
+- Open an issue on GitHub
+- Join our Discord community (coming soon)
+- Check out the documentation wiki
 
 ---
 
-**Current Status**: This is a development version with separated frontend and backend. The frontend displays habit data from JSON files with basic UI interactions, while the backend provides a simple email service. Full integration and database persistence are planned for future releases.
+**Current Status**: Active development with authentication system implemented. Gamification features and social competitive elements are the next major milestone. The app is transitioning from JSON storage to a full database solution.
 
-Built with ❤️ using modern web technologies.
+Built with ❤️ for the productivity community. Let's make habit building fun and social! 🚀
