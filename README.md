@@ -14,8 +14,8 @@ A modern productivity application with separated frontend and backend architectu
 This project consists of two separate applications:
 
 - **Frontend**: Next.js 15 application with React, TypeScript, and Tailwind CSS
-- **Backend**: Node.js API server with Express.js for email services only
-- **Data Storage**: JSON files with in-memory tracking (no database integration yet)
+- **Backend**: Node.js API server with Express.js for email and habit management
+- **Data Storage**: JSON files in backend with API integration (transitioning from frontend JSON)
 
 ## ✨ Features
 
@@ -65,9 +65,11 @@ This project consists of two separate applications:
 - **PostCSS** - CSS processing and optimization
 
 ### Data Storage
-- **JSON Files** - Static habit data stored in `frontend/utils/habits.json`
+- **Backend JSON Storage** - Habit data stored in `backend/data/habits.json`
+- **Frontend API Integration** - Frontend fetches data from backend API
+- **Legacy JSON Files** - `frontend/utils/habits.json` (being phased out)
 - **In-Memory Tracking** - Daily completion tracking (resets on page refresh)
-- **No Database** - Currently no persistent backend storage
+- **No Database** - Transitioning from JSON files to future database integration
 
 ## 📁 Project Structure
 
@@ -98,7 +100,7 @@ productivity-app/
 │   │   ├── habit.ts             # Habit type definitions
 │   │   └── types.ts             # General type definitions
 │   ├── utils/                   # Utility functions
-│   │   ├── habits.json          # Static habit data
+│   │   ├── habits.json          # Static habit data (legacy)
 │   │   ├── habitFunctions.ts    # Habit manipulation functions
 │   │   ├── users.json           # Static user data
 │   │   └── userFunctions.ts     # User utility functions
@@ -106,9 +108,14 @@ productivity-app/
 │   └── package.json             # Frontend dependencies
 ├── backend/                      # Node.js Backend API
 │   ├── controllers/             # Business logic controllers
-│   │   └── emailController.js   # Email handling logic
+│   │   ├── emailController.js   # Email handling logic
+│   │   └── habitController.js   # Habit CRUD operations
 │   ├── routes/                  # API route definitions
-│   │   └── email.js             # Email endpoints
+│   │   ├── email.js             # Email endpoints
+│   │   ├── habits.js            # Habit endpoints
+│   │   └── auth.js              # Auth endpoints
+│   ├── data/                    # JSON data storage
+│   │   └── habits.json          # Habit data persistence
 │   ├── index.js                 # Main Express server
 │   └── package.json             # Backend dependencies
 ├── .gitignore                   # Git ignore rules
@@ -181,12 +188,25 @@ node index.js           # Start server (port 4000)
 
 ## 🔌 API Documentation
 
-### Email Endpoints
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/send-email` | Send email with habit data |
+### Habit Endpoints
+| Method | Endpoint | Description | Status |
+|--------|----------|-------------|---------|
+| `GET` | `/api/habits` | Get all habits | ✅ Implemented |
+| `POST` | `/api/habits` | Create new habit | 🚧 In Progress |
+| `PUT` | `/api/habits/:id` | Update existing habit | 🚧 In Progress |
+| `DELETE` | `/api/habits/:id` | Delete habit | 🚧 In Progress |
 
-### Sample API Request
+### Email Endpoints
+| Method | Endpoint | Description | Status |
+|--------|----------|-------------|---------|
+| `POST` | `/api/send-email` | Send email with habit data | ✅ Implemented |
+
+### Sample API Requests
+
+**Get all habits:**
+```bash
+curl -X GET http://localhost:4000/api/habits
+```
 
 **Send email:**
 ```bash
@@ -201,7 +221,8 @@ curl -X POST http://localhost:4000/api/send-email \
 **Response:**
 ```json
 {
-  "success": true
+  "success": true,
+  "message": "Email sent successfully"
 }
 ```
 
@@ -211,20 +232,21 @@ curl -X POST http://localhost:4000/api/send-email \
 
 ### Frontend-Backend Separation
 - **Frontend**: Complete Next.js application with habit UI components
-- **Backend**: Simple Express.js server providing email services only
-- **Data Flow**: Frontend reads from JSON files, no backend integration for habits yet
+- **Backend**: Express.js server providing email services and habit API endpoints
+- **Data Flow**: Frontend fetches habits from backend API (`/api/habits`)
 
 ### Frontend Architecture
 - **App Router**: Next.js 15 with modern App Router structure
 - **Route Groups**: Organized with `(auth)` route grouping for authenticated sections
-- **JSON Data Source**: Habits loaded from `utils/habits.json`
+- **API Integration**: Frontend calls backend endpoints for habit data
 - **In-Memory State**: Daily completion tracking (temporary, resets on refresh)
 - **UI Components**: Modal-based CRUD operations (edit/delete modals)
 
 ### Backend Architecture
-- **Minimal API**: Single email endpoint for demonstration
+- **REST API**: Habit and email endpoints with proper HTTP methods
+- **JSON Storage**: File-based data persistence in `backend/data/habits.json`
+- **ES Modules**: Using modern ES6 import/export syntax
 - **CORS Enabled**: Ready for frontend integration
-- **ES6 Modules**: Using `require()` syntax (not ES modules yet)
 
 ### Component Architecture
 - **Separation of Concerns**: Layout, business logic, and presentation components
@@ -350,11 +372,10 @@ NODE_ENV=production
 
 ### Current Limitations
 
-- **No Persistence**: Habit changes are not saved
+- **Partial Backend Integration**: GET habits works, but POST/PUT/DELETE not yet implemented
 - **In-Memory Only**: Daily completions reset on page refresh
-- **No Backend Integration**: Frontend and backend are not connected
-- **No Authentication**: Login/signup pages are UI only
-- **Static Data**: All habit data comes from JSON files
+- **Limited Authentication**: Login/signup pages are UI only
+- **Transitioning Architecture**: Moving from frontend JSON to backend API storage
 
 ## 🤝 Contributing
 
