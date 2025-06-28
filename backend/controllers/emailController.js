@@ -10,4 +10,4 @@ const sendEmail = async (req, res) => {
   return res.status(200).json({ success: true, message: 'Email sent successfully' });
 };
 
-export default send
+export default sendEmail
