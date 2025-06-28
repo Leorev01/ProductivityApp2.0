@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 
-export default function Login() {
+export default function Signup() {
   return (
     <>
     <Navbar />
@@ -21,11 +21,11 @@ export default function Login() {
                 src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                 className="h-10 w-auto"
               />
-              <h2 className="mt-8 text-2xl/9 font-bold tracking-tight text-gray-900">Log in to your account</h2>
+              <h2 className="mt-8 text-2xl/9 font-bold tracking-tight text-gray-900">Sign up for an account</h2>
               <p className="mt-2 text-sm/6 text-gray-500">
-                Not a member?{' '}
+                Already a member?{' '}
                 <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                  Start a 14 day free trial
+                    Sign in to your account
                 </a>
               </p>
             </div>
@@ -57,6 +57,22 @@ export default function Login() {
                       <input
                         id="password"
                         name="password"
+                        type="password"
+                        required
+                        autoComplete="current-password"
+                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="confirm-password" className="block text-sm/6 font-medium text-gray-900">
+                      Confirm Password
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        id="confirm-password"
+                        name="confirm-password"
                         type="password"
                         required
                         autoComplete="current-password"
@@ -101,12 +117,6 @@ export default function Login() {
                         Remember me
                       </label>
                     </div>
-
-                    <div className="text-sm/6">
-                      <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                        Forgot password?
-                      </a>
-                    </div>
                   </div>
 
                   <div>
@@ -114,7 +124,7 @@ export default function Login() {
                       type="submit"
                       className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                      Log in
+                      Sign up
                     </button>
                   </div>
                 </form>

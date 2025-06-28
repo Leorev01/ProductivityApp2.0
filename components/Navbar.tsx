@@ -63,7 +63,7 @@ export default function Navbar() {
               href="/login"
               className="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
             >
-              Sign in
+              Log in
             </Link>
             <Link
               href="/signup"
@@ -99,7 +99,7 @@ export default function Navbar() {
               href="/login"
               className="block py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
             >
-              Sign in
+              Log in
             </DisclosureButton>
             <DisclosureButton
               as={Link}
