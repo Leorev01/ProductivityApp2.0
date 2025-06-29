@@ -2,5 +2,12 @@ export interface User {
     id: number
     email: string
     password: string
-    // Add other user properties as needed
+    name: string
+    phone: string
+    joinDate: string
+    membershipType: string
+    dayStreak: number
+    completedTasks: number
+    totalXP: number
+    level: number
 }
