@@ -10,7 +10,7 @@ export default function Navbar() {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'News', href: '/news' },
+    { name: 'Packages', href: '/packages' },
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Calendar', href: '/dashboard/calendar' },
   ]
