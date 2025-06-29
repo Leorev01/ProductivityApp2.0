@@ -1,3 +1,4 @@
+import FeatureSection from "@/components/Home/FeatureSection";
 import HeroSection from "@/components/Home/HeroSection";
 import Navbar from "@/components/Navbar";
 export default function Home() {
@@ -5,6 +6,7 @@ export default function Home() {
     <>
       <Navbar />
       <HeroSection />
+      <FeatureSection />
     </>
   );
 }
