@@ -11,7 +11,8 @@
             "dayStreak": 5,
             "completedTasks": 120,
             "totalXP": 1500,
-            "level": 10
+            "level": 10,
+            "friends": [2]
         },
         {
             "id": 2,
@@ -24,7 +25,8 @@
             "dayStreak": 5,
             "completedTasks": 20,
             "totalXP": 300,
-            "level": 3
+            "level": 3,
+            "friends": [1]
         }
     ]
 }

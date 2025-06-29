@@ -10,4 +10,5 @@ export interface User {
     completedTasks: number
     totalXP: number
     level: number
+    friends: number[]
 }

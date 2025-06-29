@@ -62,7 +62,8 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
             dayStreak: 0, // Default day streak
             completedTasks: 0, // Default completed tasks
             totalXP: 0, // Default total XP
-            level: 1 // Default level
+            level: 1, // Default level
+            friends: [] // Default empty friends list
         }
         userData.push(newUser)
         
