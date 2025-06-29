@@ -1,32 +1,30 @@
-{
-    "users":[
-        {
-            "id": 1,
-            "email": "email",
-            "password": "password",
-            "name": "User",
-            "phone": "+1 (555) 123-4567",
-            "joinDate": "January 2024",
-            "membershipType": "standard",
-            "dayStreak": 5,
-            "completedTasks": 120,
-            "totalXP": 1500,
-            "level": 10,
-            "friends": [2]
-        },
-        {
-            "id": 2,
-            "email": "email2",
-            "password": "password2",
-            "name": "User2",
-            "phone": "+1 (555) 123-4568",
-            "joinDate": "January 2024",
-            "membershipType": "standard",
-            "dayStreak": 5,
-            "completedTasks": 20,
-            "totalXP": 300,
-            "level": 3,
-            "friends": [1]
-        }
-    ]
-}
+[
+    {
+        "id": 1,
+        "email": "email",
+        "password": "password",
+        "name": "User",
+        "phone": "+1 (555) 123-4567",
+        "joinDate": "January 2024",
+        "membershipType": "standard",
+        "dayStreak": 5,
+        "completedTasks": 120,
+        "totalXP": 1500,
+        "level": 10,
+        "friends": [2]
+    },
+    {
+        "id": 2,
+        "email": "email2",
+        "password": "password2",
+        "name": "User2",
+        "phone": "+1 (555) 123-4568",
+        "joinDate": "January 2024",
+        "membershipType": "standard",
+        "dayStreak": 5,
+        "completedTasks": 20,
+        "totalXP": 300,
+        "level": 3,
+        "friends": [1]
+    }
+]
