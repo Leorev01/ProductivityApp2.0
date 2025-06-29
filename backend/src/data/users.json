@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "email": "email",
+        "email": "email@email.com",
         "password": "password",
         "name": "User",
         "phone": "+1 (555) 123-4567",
@@ -15,7 +15,7 @@
     },
     {
         "id": 2,
-        "email": "email2",
+        "email": "email2@email.com",
         "password": "password2",
         "name": "User2",
         "phone": "+1 (555) 123-4568",
