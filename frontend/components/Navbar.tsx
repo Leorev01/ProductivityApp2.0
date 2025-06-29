@@ -12,7 +12,7 @@ export default function Navbar() {
     { name: 'Home', href: '/' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Dashboard', href: '/dashboard' },
-    { name: 'Features', href: '/#features' },
+    { name: 'Features', href: '/features' },
   ]
 
   const isActive = (href: string) => {
