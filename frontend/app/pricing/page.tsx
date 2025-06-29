@@ -3,7 +3,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/react/24/outline'
 import { CheckIcon } from '@heroicons/react/20/solid'
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/Navbars/Navbar'
 
 const pricing = {
   tiers: [
