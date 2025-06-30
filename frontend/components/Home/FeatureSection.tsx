@@ -1,20 +1,20 @@
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+import { ChartBarIcon, TrophyIcon, UserGroupIcon } from '@heroicons/react/20/solid'
 
 const features = [
   {
-    name: 'Push to deploy.',
-    description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
-    icon: CloudArrowUpIcon,
+    name: 'Smart Habit Tracking',
+    description: 'Track daily habits with intelligent reminders and progress visualization. Never miss a day with our adaptive scheduling system.',
+    icon: ChartBarIcon,
   },
   {
-    name: 'SSL certificates.',
-    description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-    icon: LockClosedIcon,
+    name: 'Gamified Progress',
+    description: 'Earn XP, unlock achievements, and level up as you build better habits. Turn your personal growth into an engaging game.',
+    icon: TrophyIcon,
   },
   {
-    name: 'Database backups.',
-    description: 'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.',
-    icon: ServerIcon,
+    name: 'Social Accountability',
+    description: 'Connect with friends, join challenges, and climb leaderboards. Stay motivated through friendly competition and support.',
+    icon: UserGroupIcon,
   },
 ]
 
@@ -26,15 +26,22 @@ export default function FeatureSection() {
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center lg:gap-y-0">
             <div className="lg:row-start-2 lg:max-w-md">
               <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                Boost your productivity. Start using our app today.
+                Transform habits into achievements. Start your journey today.
               </h2>
               <p className="mt-6 text-lg/8 text-gray-300">
-                Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing sagittis vel nulla.
-                Ac euismod vel sit maecenas.
+                Join thousands of users who have revolutionized their daily routines with our gamified habit tracking system. Build lasting habits that actually stick.
               </p>
+              <div className="mt-8">
+                <a
+                  href="/signup"
+                  className="inline-flex rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Start building habits
+                </a>
+              </div>
             </div>
             <img
-              alt="Product screenshot"
+              alt="ProductiveLife app dashboard screenshot"
               src="https://tailwindcss.com/plus-assets/img/component-images/dark-project-app-screenshot.png"
               width={2432}
               height={1442}
