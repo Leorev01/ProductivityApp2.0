@@ -9,14 +9,14 @@ import {
   ChartBarIcon,
   UserGroupIcon,
 } from '@heroicons/react/24/outline';
-import {Friend} from '@/types/types'; // Assuming you have a types file for Friend type
-import FriendCard from '@/components/Friends/FriendCard';
+import FriendTabs from '@/components/Friends/FriendTabs';
+import { Friend } from '@/types/types';
 
-const FriendsPage = () => {
+export default function FriendsPage(){
   const [activeTab, setActiveTab] = useState<'friends' | 'requests' | 'suggestions'>('friends');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // All friends data in one array
+  // Move the friends data to the parent component
   const allFriends: Friend[] = [
     // Accepted friends
     {
@@ -128,40 +128,6 @@ const FriendsPage = () => {
     { id: 'suggestions' as const, name: 'Suggestions', count: suggestions.length }
   ];
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'friends':
-        return (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {friends.map((friend) => (
-              <FriendCard key={friend.id} friend={friend} />
-            ))}
-          </div>
-        );
-      
-      case 'requests':
-        return (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {friendRequests.map((request) => (
-              <FriendCard key={request.id} friend={request} />
-            ))}
-          </div>
-        );
-      
-      case 'suggestions':
-        return (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {suggestions.map((suggestion) => (
-              <FriendCard key={suggestion.id} friend={suggestion} />
-            ))}
-          </div>
-        );
-      
-      default:
-        return null;
-    }
-  };
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
@@ -266,7 +232,12 @@ const FriendsPage = () => {
 
       {/* Content */}
       <div className="mb-8">
-        {renderContent()}
+        <FriendTabs 
+          activeTab={activeTab}
+          friends={friends}
+          friendRequests={friendRequests}
+          suggestions={suggestions}
+        />
       </div>
 
       {/* Empty State for when no results */}
@@ -294,5 +265,3 @@ const FriendsPage = () => {
     </div>
   );
 };
-
-export default FriendsPage;
