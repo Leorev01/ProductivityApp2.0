@@ -41,3 +41,5 @@ const fetchFriends = async (req: Request, res: Response) => {
         })
     }
 }
+
+export {fetchFriends}
