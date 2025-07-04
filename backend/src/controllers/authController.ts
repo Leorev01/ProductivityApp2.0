@@ -56,6 +56,8 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
             email,
             password: hashedPassword,
             name: 'User', // Default name, can be changed later
+            username: 'user' + (userData.length + 1), // Default username
+            avatar: 'https://example.com/avatar' + (userData.length + 1),
             phone: '', // Default phone, can be changed later
             joinDate: new Date().toISOString().split('T')[0], // Current date
             membershipType: 'standard', // Default membership type
@@ -63,7 +65,6 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
             completedTasks: 0, // Default completed tasks
             totalXP: 0, // Default total XP
             level: 1, // Default level
-            friends: [] // Default empty friends list
         }
         userData.push(newUser)
         

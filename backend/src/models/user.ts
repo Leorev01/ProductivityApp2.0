@@ -3,7 +3,8 @@ export interface User {
     email: string
     password: string
     name: string
-    avatar: string
+    username: string
+    avatar?: string
     phone: string
     joinDate: string
     membershipType: string
@@ -11,5 +12,4 @@ export interface User {
     completedTasks: number
     totalXP: number
     level: number
-    friends: number[]
 }
