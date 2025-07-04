@@ -5,6 +5,7 @@ import emailRoutes from './routes/email.js';
 import habitRoutes from './routes/habits.js';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/user.js';
+import friendRoutes from './routes/friends.js';
 
 //Load environment variables
 dotenv.config();
@@ -19,6 +20,7 @@ app.use('/api/email', emailRoutes);
 app.use('/api/habits', habitRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes); 
+app.use('/api/friends', friendRoutes);
 
 //create port
 const PORT = process.env.PORT || 4000;

@@ -20,7 +20,7 @@ const fetchFriends = async (req: Request, res: Response) => {
         });
     }
     try{
-        const filePath = path.join('../data/friends.json')
+        const filePath = path.join(__dirname, '../data/friends.json')
         const data = await fs.promises.readFile(filePath, 'utf-8')
         const friends: Friend[] = JSON.parse(data)
         if(!friends){
