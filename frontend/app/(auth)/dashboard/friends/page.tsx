@@ -48,6 +48,35 @@ export default function FriendsPage(){
   const requested = friends.filter(friend => friend.status === 'pending');
   const suggestions = friends.filter(friend => friend.status === 'suggested');
 
+  function fetchAverageFriendStats(){
+  if (accepted.length === 0) {
+    return {
+      averageStreak: 0,
+      averageXP: 0,
+      topFriendLevel: 0,
+      topFriendUsername: '', // ✅ Added username
+    };
+  }
+  
+  const totalStreaks = accepted.reduce((sum, friend) => sum + (friend.streak || 0), 0);
+  const totalXP = accepted.reduce((sum, friend) => sum + (friend.xp || 0), 0);
+  const topFriend = accepted.reduce(
+    (max, friend) => ((friend.level ?? 0) > (max.level ?? 0) ? friend : max),
+    accepted[0]
+  );
+  
+  return {
+    averageStreak: Math.round(totalStreaks / accepted.length),
+    averageXP: Math.round(totalXP / accepted.length),
+    topFriendLevel: topFriend.level || 0,
+    topFriendUsername: topFriend.username || 'Unknown', // ✅ Added username
+  };
+}
+
+// ✅ Update the destructuring to include username
+const { averageStreak, averageXP, topFriendLevel, topFriendUsername } = fetchAverageFriendStats();
+
+
   const tabs = [
     { id: 'friends' as const, name: 'Friends', count: accepted.length },
     { id: 'requests' as const, name: 'Requests', count: requested.length },
@@ -86,8 +115,8 @@ export default function FriendsPage(){
           <div className="flex items-center">
             <TrophyIcon className="w-8 h-8 text-yellow-500" />
             <div className="ml-4">
-              <p className="text-2xl font-bold text-gray-900">3</p>
-              <p className="text-gray-600 text-sm">Active Challenges</p>
+              <p className="text-2xl font-bold text-gray-900">{topFriendUsername}<span className='text-xl font-extralight'>:LV{topFriendLevel}</span></p>
+              <p className="text-gray-600 text-sm">Top Ranked Friend</p>
             </div>
           </div>
         </div>
@@ -96,8 +125,8 @@ export default function FriendsPage(){
           <div className="flex items-center">
             <FireIcon className="w-8 h-8 text-orange-500" />
             <div className="ml-4">
-              <p className="text-2xl font-bold text-gray-900">15</p>
-              <p className="text-gray-600 text-sm">Avg Group Streak</p>
+              <p className="text-2xl font-bold text-gray-900">{averageStreak}</p>
+              <p className="text-gray-600 text-sm">Avg Friend Streak</p>
             </div>
           </div>
         </div>
@@ -106,8 +135,8 @@ export default function FriendsPage(){
           <div className="flex items-center">
             <ChartBarIcon className="w-8 h-8 text-green-500" />
             <div className="ml-4">
-              <p className="text-2xl font-bold text-gray-900">85%</p>
-              <p className="text-gray-600 text-sm">Success Rate</p>
+              <p className="text-2xl font-bold text-gray-900">{averageXP} XP</p>
+              <p className="text-gray-600 text-sm">Avergae Friend XP</p>
             </div>
           </div>
         </div>
