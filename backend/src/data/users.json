@@ -44,5 +44,35 @@
         "completedTasks": 50,
         "totalXP": 800,
         "level": 5
+    },
+    {
+        "id": 4,
+        "email": "email4@email.com",
+        "password": "password4",
+        "name": "User4",
+        "username": "user456",
+        "avatar": "https://example.com/avatar4.png",
+        "phone": "+1 (555) 123-4570",
+        "joinDate": "January 2024",
+        "membershipType": "standard",
+        "dayStreak": 5,
+        "completedTasks": 80,
+        "totalXP": 1200,
+        "level": 8
+    },
+    {
+        "id": 5,
+        "email": "email5@email.com",
+        "password": "password5",
+        "name": "User5",
+        "username": "user567",
+        "avatar": "https://example.com/avatar5.png",
+        "phone": "+1 (555) 123-4571",
+        "joinDate": "January 2024",
+        "membershipType": "standard",
+        "dayStreak": 5,
+        "completedTasks": 100,
+        "totalXP": 1400,
+        "level": 9
     }
 ]

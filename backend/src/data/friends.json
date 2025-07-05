@@ -10,18 +10,28 @@
     },
     {
         "id": 2,
-        "requesterId": 2,
+        "requesterId": 3,
         "addresseeId": 1,
         "status": "pending",
-        "createdAt": "2024-01-03T10:00:00Z",
-        "updatedAt": "2024-01-03T10:00:00Z"
+        "createdAt": "2024-01-04T10:00:00Z",
+        "updatedAt": "2024-01-04T10:00:00Z"
     },
     {
         "id": 3,
-        "requesterId": 1,
+        "requesterId": 2,
         "addresseeId": 3,
         "status": "rejected",
-        "createdAt": "2024-01-04T10:00:00Z",
-        "updatedAt": "2024-01-04T10:00:00Z"
+        "createdAt": "2024-01-05T10:00:00Z",
+        "rejectedAt": "2024-01-06T10:00:00Z",
+        "updatedAt": "2024-01-06T10:00:00Z"
+    },
+    {
+        "id": 4,
+        "requesterId": 1,
+        "addresseeId": 4,
+        "status": "accepted",
+        "createdAt": "2024-01-07T10:00:00Z",
+        "acceptedAt": "2024-01-08T10:00:00Z",
+        "updatedAt": "2024-01-08T10:00:00Z"
     }
 ]
