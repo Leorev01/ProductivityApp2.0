@@ -1,5 +1,5 @@
 import express from "express"
-import {fetchFriends} from "../controllers/friendController"
+import {fetchFriends} from "../controllers/friendController.js"
 
 //configure router
 const router = express.Router()
@@ -7,6 +7,6 @@ const router = express.Router()
 //routes
 
 //get all friends
-router.get('/friends', fetchFriends)
+router.get('/', fetchFriends)
 
 export default router
