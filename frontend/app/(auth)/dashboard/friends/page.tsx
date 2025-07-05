@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   UserPlusIcon, 
   MagnifyingGlassIcon, 
@@ -15,116 +15,42 @@ import { Friend } from '@/types/types';
 export default function FriendsPage(){
   const [activeTab, setActiveTab] = useState<'friends' | 'requests' | 'suggestions'>('friends');
   const [searchQuery, setSearchQuery] = useState('');
+  const [friends, setFriends] = useState<Friend[]>([]);
 
-  // Move the friends data to the parent component
-  const allFriends: Friend[] = [
-    // Accepted friends
-    {
-      id: 1,
-      name: 'Sarah Chen',
-      username: 'sarahchen',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b589?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      status: 'accepted',
-      onlineStatus: 'online',
-      level: 15,
-      xp: 4250,
-      streak: 23,
-      completedToday: 8,
-      totalHabits: 12,
-      mutualFriends: 3
-    },
-    {
-      id: 2,
-      name: 'Michael Rodriguez',
-      username: 'mrodriguez',
-      avatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      status: 'accepted',
-      onlineStatus: 'offline',
-      level: 12,
-      xp: 3100,
-      streak: 15,
-      completedToday: 5,
-      totalHabits: 8,
-      mutualFriends: 2
-    },
-    {
-      id: 3,
-      name: 'Emily Johnson',
-      username: 'emjohnson',
-      avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      status: 'accepted',
-      onlineStatus: 'online',
-      level: 18,
-      xp: 5670,
-      streak: 31,
-      completedToday: 10,
-      totalHabits: 15,
-      mutualFriends: 5
-    },
-    {
-      id: 4,
-      name: 'David Kim',
-      username: 'davidkim',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      status: 'accepted',
-      onlineStatus: 'online',
-      level: 10,
-      xp: 2890,
-      streak: 7,
-      completedToday: 3,
-      totalHabits: 6,
-      mutualFriends: 1
-    },
-    
-    // Pending friend requests
-    {
-      id: 5,
-      name: 'Alex Thompson',
-      username: 'alexthompson',
-      avatar: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      status: 'pending',
-      mutualFriends: 2,
-      requestedAt: '2 days ago'
-    },
-    {
-      id: 6,
-      name: 'Jessica Torres',
-      username: 'jessicatorres',
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      status: 'pending',
-      mutualFriends: 1,
-      requestedAt: '1 week ago'
-    },
-    
-    // Friend suggestions
-    {
-      id: 7,
-      name: 'Lisa Park',
-      username: 'lisapark',
-      avatar: 'https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      status: 'suggested',
-      mutualFriends: 4,
-      reason: 'Similar habits'
-    },
-    {
-      id: 8,
-      name: 'James Wilson',
-      username: 'jameswilson',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      status: 'suggested',
-      mutualFriends: 2,
-      reason: 'Productivity enthusiast'
+  useEffect(() => {
+
+    const fecthFriends = async () => {
+      try{
+        const mockUserId = 1 //Fake user ID
+        
+        const response = await fetch(`http://localhost:4000/api/friends/?userId=${mockUserId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log(response)
+        if (!response.ok) {
+          throw new Error('Failed to fetch friends data');
+        }
+        const data = await response.json();
+        setFriends(data.data);
+
+      }catch{
+        console.error('Error fetching friends data');
+      }
     }
-  ];
+    fecthFriends();
+  }, [searchQuery]);
 
   // Filter friends by status
-  const friends = allFriends.filter(friend => friend.status === 'accepted');
-  const friendRequests = allFriends.filter(friend => friend.status === 'pending');
-  const suggestions = allFriends.filter(friend => friend.status === 'suggested');
+  const accepted = friends.filter(friend => friend.status === 'accepted');
+  const requested = friends.filter(friend => friend.status === 'pending');
+  const suggestions = friends.filter(friend => friend.status === 'suggested');
 
   const tabs = [
-    { id: 'friends' as const, name: 'Friends', count: friends.length },
-    { id: 'requests' as const, name: 'Requests', count: friendRequests.length },
+    { id: 'friends' as const, name: 'Friends', count: accepted.length },
+    { id: 'requests' as const, name: 'Requests', count: requested.length },
     { id: 'suggestions' as const, name: 'Suggestions', count: suggestions.length }
   ];
 
@@ -150,7 +76,7 @@ export default function FriendsPage(){
           <div className="flex items-center">
             <UserGroupIcon className="w-8 h-8 text-indigo-600" />
             <div className="ml-4">
-              <p className="text-2xl font-bold text-gray-900">{friends.length}</p>
+              <p className="text-2xl font-bold text-gray-900">{accepted.length}</p>
               <p className="text-gray-600 text-sm">Total Friends</p>
             </div>
           </div>
@@ -234,15 +160,15 @@ export default function FriendsPage(){
       <div className="mb-8">
         <FriendTabs 
           activeTab={activeTab}
-          friends={friends}
-          friendRequests={friendRequests}
+          friends={accepted}
+          friendRequests={requested}
           suggestions={suggestions}
         />
       </div>
 
       {/* Empty State for when no results */}
-      {((activeTab === 'friends' && friends.length === 0) ||
-        (activeTab === 'requests' && friendRequests.length === 0) ||
+      {((activeTab === 'friends' && accepted.length === 0) ||
+        (activeTab === 'requests' && requested.length === 0) ||
         (activeTab === 'suggestions' && suggestions.length === 0)) && (
         <div className="text-center py-12">
           <UserGroupIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
