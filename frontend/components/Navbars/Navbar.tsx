@@ -11,8 +11,9 @@ export default function Navbar() {
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Pricing', href: '/pricing' },
-    { name: 'Dashboard', href: '/dashboard' },
     { name: 'Features', href: '/features' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
   ]
 
   const isActive = (href: string) => {
