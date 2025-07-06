@@ -82,25 +82,25 @@ const About = () => {
 
   const milestones = [
     {
-      year: '2022',
+      year: '2025',
       title: 'The Idea',
       description: 'Founded by two friends who struggled with maintaining healthy habits despite trying countless apps.',
       icon: LightBulbIcon
     },
     {
-      year: '2023',
+      year: 'Coming soon ...',
       title: 'Beta Launch',
       description: 'Released our MVP to 100 beta users. Achieved 85% daily retention rate within first month.',
       icon: RocketLaunchIcon
     },
     {
-      year: '2024',
+      year: 'Coming soon ...',
       title: 'Growing Community',
       description: 'Reached 10,000+ active users with 50,000+ habits tracked. Launched social features.',
       icon: UserGroupIcon
     },
     {
-      year: '2025',
+      year: 'Coming soon ...',
       title: 'AI Integration',
       description: 'Introduced AI-powered insights and personalized recommendations. Expanding globally.',
       icon: SparklesIcon
