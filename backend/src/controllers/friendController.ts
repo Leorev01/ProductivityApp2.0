@@ -55,7 +55,7 @@ const fetchFriends = async (req: Request, res: Response) => {
             if (!otherUser) return null;
             
             return {
-                id: friendship.id,
+                id: otherUser.id,
                 name: otherUser.name,
                 username: otherUser.username,
                 avatar: otherUser.avatar || 'https://example.com/default.jpg',
@@ -66,7 +66,7 @@ const fetchFriends = async (req: Request, res: Response) => {
                 // Only for accepted friends
                 ...(friendship.status === 'accepted' && {
                     level: otherUser.level,
-                    xp: otherUser.totalXP,
+                    totalXP: otherUser.totalXP,
                     streak: otherUser.dayStreak,
                     completedToday: Math.floor(Math.random() * 10),
                     totalHabits: Math.floor(Math.random() * 15) + 5,

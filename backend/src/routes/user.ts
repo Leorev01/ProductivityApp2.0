@@ -6,16 +6,16 @@ const router = express.Router();
 
 // Create Routes
 
-// GET /api/habits - Get all habits
+// GET /api/user - Get all users
 router.get("/", fetchUser);
 
-// // POST /api/habits - Create a new habit
-// router.post("/", addHabit);
+// // POST /api/user - Create a new user
+// router.post("/", adduser);
 
-// // PUT /api/habits/:id - Update an existing habit
-// router.put("/:id", updateHabit);
+// // PUT /api/user/:id - Update an existing user
+// router.put("/:id", updateuser);
 
-// // DELETE /api/habits/:id - Delete a habit
-// router.delete("/:id", deleteHabit);
+// // DELETE /api/user/:id - Delete a user
+// router.delete("/:id", deleteuser);
 
 export default router;
