@@ -59,7 +59,7 @@ export default function FriendsPage(){
   }
   
   const totalStreaks = accepted.reduce((sum, friend) => sum + (friend.streak || 0), 0);
-  const totalXP = accepted.reduce((sum, friend) => sum + (friend.xp || 0), 0);
+  const totalXP = accepted.reduce((sum, friend) => sum + (friend.totalXP || 0), 0);
   const topFriend = accepted.reduce(
     (max, friend) => ((friend.level ?? 0) > (max.level ?? 0) ? friend : max),
     accepted[0]

@@ -1,37 +1,38 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { TrophyIcon } from '@heroicons/react/24/outline'
+import { Friend, User } from '@/types/types'
 
 // Sample habit completion data - in real app this would come from your database
 const habitCompletions: { [date: string]: boolean } = {
-  '2025-06-01': true,
-  '2025-06-02': true,
-  '2025-06-03': false,
-  '2025-06-04': true,
-  '2025-06-05': true,
-  '2025-06-06': true,
-  '2025-06-07': true,
-  '2025-06-08': false,
-  '2025-06-09': true,
-  '2025-06-10': true,
-  '2025-06-11': true,
-  '2025-06-12': true,
-  '2025-06-13': true,
-  '2025-06-14': false,
-  '2025-06-15': true,
-  '2025-06-16': true,
-  '2025-06-17': true,
-  '2025-06-18': true,
-  '2025-06-19': true,
-  '2025-06-20': true,
-  '2025-06-21': false,
-  '2025-06-22': true,
-  '2025-06-23': true,
-  '2025-06-24': true,
-  '2025-06-25': true,
-  '2025-06-26': true,
+  '2025-08-01': true,
+  '2025-08-02': true,
+  '2025-08-03': false,
+  '2025-08-04': true,
+  '2025-08-05': true,
+  '2025-08-06': true,
+  '2025-08-07': true,
+  '2025-08-08': false,
+  '2025-08-09': true,
+  '2025-08-10': true,
+  '2025-08-11': true,
+  '2025-08-12': true,
+  '2025-08-13': true,
+  '2025-08-14': false,
+  '2025-08-15': true,
+  '2025-08-16': true,
+  '2025-08-17': true,
+  '2025-08-18': true,
+  '2025-08-19': true,
+  '2025-08-20': true,
+  '2025-08-21': false,
+  '2025-08-22': true,
+  '2025-08-23': true,
+  '2025-08-24': true,
+  '2025-08-25': true,
+  '2025-08-26': true,
   // Today (27th) is incomplete - work in progress
 }
 
@@ -89,48 +90,6 @@ function generateCalendarDays(year: number, month: number) {
   
   return [...daysFromPrevMonth, ...currentMonthDays, ...daysFromNextMonth]
 }
-const leaderboardUsers = [
-  {
-    id: 1,
-    name: 'Sarah Johnson',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    score: 2450,
-    rank: 1,
-    streak: 28,
-  },
-  {
-    id: 2,
-    name: 'Mike Chen',
-    avatar: 'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    score: 2380,
-    rank: 2,
-    streak: 21,
-  },
-  {
-    id: 3,
-    name: 'Emma Davis',
-    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    score: 2290,
-    rank: 3,
-    streak: 15,
-  },
-  {
-    id: 4,
-    name: 'Alex Rodriguez',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    score: 2180,
-    rank: 4,
-    streak: 12,
-  },
-  {
-    id: 5,
-    name: 'Jessica Wilson',
-    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    score: 2050,
-    rank: 5,
-    streak: 9,
-  },
-]
 
 function classNames(...classes: (string | boolean | undefined)[]) {
   return classes.filter(Boolean).join(' ')
@@ -151,6 +110,8 @@ function getRankColor(rank: number) {
 
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date())
+  const [leaderboard, setLeaderboard] = useState<User[]>();
+  const [mainUser, setUser] = useState<User | undefined>();
   
   const currentYear = currentDate.getFullYear()
   const currentMonth = currentDate.getMonth()
@@ -169,6 +130,30 @@ export default function Calendar() {
   const goToNextMonth = () => {
     setCurrentDate(new Date(currentYear, currentMonth + 1, 1))
   }
+
+  useEffect(() => {
+    const mockUserId = 1;
+    const fecthLeaderboard = async () => {
+      const response = await fetch(`http://localhost:4000/api/friends/?userId=${mockUserId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type':'application/json'
+        }
+      })
+      if(!response.ok) throw new Error("Failed to fetch friends");
+      const response2 = await fetch(`http://localhost:4000/api/user/?id=${mockUserId}`);
+      if(!response2.ok) throw new Error("Failed to fetch user");
+      const friends = await response.json();
+      const friendsData = friends.data.filter((friend:Friend) => friend.status === 'accepted');
+      const you = await response2.json();
+      const final = [...friendsData, you];
+      final.sort((a,b) => b.totalXP - a.totalXP);
+      setLeaderboard(final);
+      setUser(you);
+      console.log(final);
+    }
+    fecthLeaderboard();
+  },[])
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {/* Calendar Section - Left Side */}
@@ -249,19 +234,19 @@ export default function Calendar() {
         </div>
         
         <div className="space-y-4">
-          {leaderboardUsers.map((user) => (
+          {leaderboard && leaderboard.slice(0, 1).map((user, index) => (
             <div
               key={user.id}
-              className="flex items-center justify-between p-4 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+              className={`flex items-center justify-between p-4 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors${mainUser && user.id === mainUser.id ? ' bg-green-400 hover:bg-green-500' : ''}`}
             >
               <div className="flex items-center space-x-3">
                 <div
                   className={classNames(
                     'flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold',
-                    getRankColor(user.rank)
+                    getRankColor(index+1)
                   )}
                 >
-                  #{user.rank}
+                  #{index+1}
                 </div>
                 <img
                   src={user.avatar}
@@ -270,11 +255,11 @@ export default function Calendar() {
                 />
                 <div>
                   <p className="font-medium text-gray-900">{user.name}</p>
-                  <p className="text-sm text-gray-500">{user.streak} day streak</p>
+                  {/* <p className="text-sm text-gray-500">{user.streak} day streak</p> */}
                 </div>
               </div>
               <div className="text-right">
-                <p className="font-semibold text-gray-900">{user.score.toLocaleString()}</p>
+                <p className="font-semibold text-gray-900">{user.totalXP}</p>
                 <p className="text-sm text-gray-500">points</p>
               </div>
             </div>

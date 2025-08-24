@@ -34,7 +34,7 @@ export interface Friend {
   
   // Fields only relevant for accepted friends
   level?: number;
-  xp?: number;
+  totalXP?: number;
   streak?: number;
   completedToday?: number;
   totalHabits?: number;
