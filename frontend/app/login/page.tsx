@@ -1,4 +1,34 @@
+'use client';
+import {FormEvent, useState} from 'react'
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-hot-toast';
+
 export default function Login() {
+
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const loginHandler = async (e:FormEvent) => {
+    e.preventDefault();
+    const response = await fetch(`http://localhost:4000/api/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({email, password})
+    })
+    if(!response.ok){
+      setError("Unable to login")
+      throw new Error("Unable to login")
+    }
+    const result = await response.json()
+    localStorage.setItem('user', JSON.stringify(result.user)) 
+    router.push('/dashboard');
+    toast.success('Logged in successfully!');
+  }
+
   return (
       <div className="flex min-h-[100vh] flex-1">
         <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
@@ -20,7 +50,7 @@ export default function Login() {
 
             <div className="mt-10">
               <div>
-                <form action="#" method="POST" className="space-y-6">
+                <form onSubmit={(e) => loginHandler(e)} method="POST" className="space-y-6">
                   <div>
                     <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                       Email address
@@ -30,6 +60,8 @@ export default function Login() {
                         id="email"
                         name="email"
                         type="email"
+                        value={email}
+                        onChange={(e)=> setEmail(e.target.value)}
                         required
                         autoComplete="email"
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -46,6 +78,8 @@ export default function Login() {
                         id="password"
                         name="password"
                         type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                         autoComplete="current-password"
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"

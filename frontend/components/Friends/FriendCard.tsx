@@ -93,7 +93,7 @@ export const FriendCard = ({ friend }: { friend: Friend }) => {
             <p className="text-xs text-gray-500">Today</p>
           </div>
           <div className="text-center">
-            <span className="text-sm font-semibold text-gray-900">{friend.xp?.toLocaleString()}</span>
+            <span className="text-sm font-semibold text-gray-900">{friend.totalXP?.toLocaleString()}</span>
             <p className="text-xs text-gray-500">XP</p>
           </div>
         </div>
