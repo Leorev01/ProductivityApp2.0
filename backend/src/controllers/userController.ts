@@ -10,6 +10,9 @@ const __filename = fileURLToPath(import.meta.url)
 //Get directory path of current file
 const __dirname = path.dirname(__filename)
 
+//Get file path
+const filePath = path.join(__dirname, '../data/users.json')
+
 //Fetch User function
 const fetchUser = async (req: Request, res: Response) => {
     const userId = req.query.id as string;
@@ -20,7 +23,6 @@ const fetchUser = async (req: Request, res: Response) => {
         });
     }
     try{
-        const filePath = path.join(__dirname, '../data/users.json')
         const data = await fs.promises.readFile(filePath, 'utf-8')
         const users: User[] = JSON.parse(data)
         const userData = users.find(user => user.id === parseInt(userId))
@@ -40,4 +42,23 @@ const fetchUser = async (req: Request, res: Response) => {
     }
 }
 
-export {fetchUser}
+const fetchAllUsers = async (req: Request, res:Response) => {
+    try{
+        const data = await fs.promises.readFile(filePath, 'utf-8')
+        const users: User[] = JSON.parse(data);
+        if(!users){
+            return res.status(400).json({
+                success:false,
+                error: 'No users found'
+            })
+        }
+        res.status(200).json(users);
+    }catch(error){
+        res.status(500).json({
+            success: false,
+            error: 'Failed to fetch users'
+        })
+    }
+}
+
+export {fetchUser, fetchAllUsers}
