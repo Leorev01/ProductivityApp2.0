@@ -73,7 +73,7 @@ const LeaderboardPage = () => {
                     </td>
                     <td className="py-2 px-4">{user.level ?? '-'}</td>
                     <td className="py-2 px-4">{user.totalXP ?? 0}</td>
-                    {/* <td className="py-2 px-4">{user.streak ?? user.dayStreak ?? 0}</td> */}
+                    <td className="py-2 px-4">{user.daysCompleted?.length ?? 0}</td>
                   </tr>
                 ))
               )}

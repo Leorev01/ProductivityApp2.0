@@ -84,7 +84,7 @@ export const FriendCard = ({ friend }: { friend: Friend }) => {
           <div className="text-center">
             <div className="flex items-center justify-center space-x-1">
               <FireSolidIcon className="w-4 h-4 text-orange-500" />
-              <span className="text-sm font-semibold text-gray-900">{friend.streak}</span>
+              <span className="text-sm font-semibold text-gray-900">{friend.daysCompleted?.length}</span>
             </div>
             <p className="text-xs text-gray-500">Streak</p>
           </div>

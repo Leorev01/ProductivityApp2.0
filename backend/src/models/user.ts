@@ -8,7 +8,7 @@ export interface User {
     phone: string
     joinDate: string
     membershipType: string
-    dayStreak: number
+    daysCompleted: string[]
     completedTasks: number
     totalXP: number
     level: number

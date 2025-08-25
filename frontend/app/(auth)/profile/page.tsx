@@ -22,7 +22,7 @@ export default function ProfilePage() {
     phone: '+1 (555) 123-4567',
     joinDate: 'January 2024',
     membershipType: 'Standard',
-    dayStreak: 0,
+    daysCompleted: [],
     completedTasks: 0,
     totalXP: 0,
     level: 0,
@@ -60,7 +60,7 @@ export default function ProfilePage() {
           phone: data.phone || '+1 (555) 123-4567',
           joinDate: data.joinDate || 'January 2024',
           membershipType: data.membershipType || 'Standard',
-          dayStreak: data.dayStreak || 0,
+          daysCompleted: data.daysCompleted || [],
           completedTasks: data.completedTasks || 0,
           totalXP: data.totalXP || 0,
           level: data.level || 0,
@@ -80,13 +80,13 @@ export default function ProfilePage() {
 
   const stats = [
     { name: 'Habits Completed', value: profileData.completedTasks.toString(), icon: CheckIcon, color: 'text-green-600' },
-    { name: 'Current Streak', value: `${profileData.dayStreak} days`, icon: ChartBarIcon, color: 'text-indigo-600' },
+    { name: 'Current Streak', value: `${profileData.daysCompleted.length} days`, icon: ChartBarIcon, color: 'text-indigo-600' },
     { name: 'Total XP', value: profileData.totalXP.toString(), icon: TrophyIcon, color: 'text-yellow-600' },
     { name: 'Level', value: profileData.level.toString(), icon: TrophyIcon, color: 'text-purple-600' },
   ];
 
   const achievements = [
-    { name: 'First Week', description: 'Complete 7 days in a row', earned: profileData.dayStreak >= 7 },
+    { name: 'First Week', description: 'Complete 7 days in a row', earned: profileData.daysCompleted.length >= 7 },
     { name: 'Habit Master', description: 'Maintain 10 habits simultaneously', earned: profileData.completedTasks >= 10 },
     { name: 'Early Bird', description: 'Complete morning routine 30 times', earned: false },
     //{ name: 'Social Butterfly', description: 'Invite 5 friends to the app', earned: profileData.friends.length >= 5 },

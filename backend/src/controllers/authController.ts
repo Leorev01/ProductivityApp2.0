@@ -61,7 +61,7 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
             phone: '', // Default phone, can be changed later
             joinDate: new Date().toISOString().split('T')[0], // Current date
             membershipType: 'standard', // Default membership type
-            dayStreak: 0, // Default day streak
+            daysCompleted: [], // Default empty array
             completedTasks: 0, // Default completed tasks
             totalXP: 0, // Default total XP
             level: 1, // Default level

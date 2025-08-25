@@ -67,7 +67,7 @@ const fetchFriends = async (req: Request, res: Response) => {
                 ...(friendship.status === 'accepted' && {
                     level: otherUser.level,
                     totalXP: otherUser.totalXP,
-                    streak: otherUser.dayStreak,
+                    daysCompleted: otherUser.daysCompleted,
                     completedToday: Math.floor(Math.random() * 10),
                     totalHabits: Math.floor(Math.random() * 15) + 5,
                 }),

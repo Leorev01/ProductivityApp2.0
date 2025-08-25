@@ -16,7 +16,7 @@ export interface User {
     phone: string
     joinDate: string
     membershipType: string
-    dayStreak: number
+    daysCompleted: string[]
     completedTasks: number
     totalXP: number
     level: number
@@ -35,7 +35,7 @@ export interface Friend {
   // Fields only relevant for accepted friends
   level?: number;
   totalXP?: number;
-  streak?: number;
+  daysCompleted?: string[];
   completedToday?: number;
   totalHabits?: number;
   
