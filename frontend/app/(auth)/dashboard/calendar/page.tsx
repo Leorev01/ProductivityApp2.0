@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { TrophyIcon } from '@heroicons/react/24/outline'
 import { Friend, User } from '@/types/types'
+import { useRouter } from 'next/navigation'
 
 // Sample habit completion data - in real app this would come from your database
 const habitCompletions: { [date: string]: boolean } = {
@@ -109,6 +110,7 @@ function getRankColor(rank: number) {
 }
 
 export default function Calendar() {
+  const router = useRouter();
   const [currentDate, setCurrentDate] = useState(new Date())
   const [leaderboard, setLeaderboard] = useState<User[]>();
   const [mainUser, setUser] = useState<User | undefined>();
@@ -234,7 +236,7 @@ export default function Calendar() {
         </div>
         
         <div className="space-y-4">
-          {leaderboard && leaderboard.slice(0, 1).map((user, index) => (
+          {leaderboard && leaderboard.slice(0, 5).map((user, index) => (
             <div
               key={user.id}
               className={`flex items-center justify-between p-4 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors${mainUser && user.id === mainUser.id ? ' bg-green-400 hover:bg-green-500' : ''}`}
@@ -267,7 +269,8 @@ export default function Calendar() {
         </div>
         
         <div className="mt-6 pt-4 border-t border-gray-200">
-          <button className="w-full text-center text-indigo-600 hover:text-indigo-500 font-medium">
+          <button className="w-full text-center text-indigo-600 hover:text-indigo-500 font-medium hover:cursor-pointer"
+          onClick={() => router.push('/dashboard/leaderboard')}>
             View Full Leaderboard
           </button>
         </div>
