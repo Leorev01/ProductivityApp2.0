@@ -99,21 +99,24 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
         if (!user) {
             res.status(401).json({ message: 'Invalid credentials' })
             return
-        }
-        
-        const isPasswordValid = await bcrypt.compare(password, user.password)
-        if (!isPasswordValid) {
+        } if(password !== user.password){
             res.status(401).json({ message: 'Invalid credentials' })
             return 
         }
         
+        // const isPasswordValid = await bcrypt.compare(password, user.password)
+        // if (!isPasswordValid) {
+        //     res.status(401).json({ message: 'Invalid credentials' })
+        //     return 
+        // }
+        
         // Use environment variable for JWT secret
-        const jwtSecret = process.env.JWT_SECRET || 'fallback-secret-key'
-        const token = jwt.sign({ userId: user.id }, jwtSecret, { expiresIn: '24h' })
+        //const jwtSecret = process.env.JWT_SECRET || 'fallback-secret-key'
+        //const token = jwt.sign({ userId: user.id }, jwtSecret, { expiresIn: '24h' })
         
         // Send token and user data
         res.status(200).json({ 
-            token,
+            //token,
             user: user
         })
         
