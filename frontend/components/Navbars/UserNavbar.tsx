@@ -1,26 +1,21 @@
 'use client';
 
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Disclosure } from '@headlessui/react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 export default function UserNavbar() {
-  const pathname = usePathname()
 
-  const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Pricing', href: '/pricing' },
+  const userNavigation = [
     { name: 'Dashboard', href: '/dashboard' },
-    { name: 'Features', href: '/features' },
+    { name: 'Sign out', href: '#' },
   ]
-
-  const isActive = (href: string) => {
-    if (href === '/') {
-      return pathname === '/'
-    }
-    return pathname.startsWith(href)
-  }
 
   return (
     <Disclosure as="nav" className="absolute inset-x-0 top-0 z-50"> {/* Made it transparent and positioned absolutely */}
@@ -38,88 +33,42 @@ export default function UserNavbar() {
             </Link>
           </div>
 
-          {/* Centered Navigation - Desktop */}
-          <div className="hidden md:flex md:space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                  isActive(item.href)
-                    ? 'bg-white/20 text-gray-900 font-semibold'
-                    : 'text-gray-700 hover:text-gray-900 hover:bg-white/10'
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
           {/* Auth Buttons - Desktop */}
-          <div className="hidden md:flex md:items-center md:space-x-4">
-            <Link
-              href="/login"
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
-            >
-              Log in
-            </Link>
-            <Link
-              href="/signup"
-              className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors"
-            >
-              Start Free
-            </Link>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-white/10 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-              <span className="absolute -inset-0.5" />
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon aria-hidden="true" className="block size-6 group-data-[open]:hidden" />
-              <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-[open]:block" />
-            </DisclosureButton>
-          </div>
+          <Menu as="div" className="relative">
+              <MenuButton className="relative flex items-center">
+                <span className="absolute -inset-1.5" />
+                <span className="sr-only">Open user menu</span>
+                <img
+                  alt=""
+                  src="https://media.licdn.com/dms/image/v2/D4E03AQHkICFwtKrgxg/profile-displayphoto-shrink_800_800/B4EZYfr_gEHgAc-/0/1744288351996?e=1756339200&v=beta&t=LX_vMZ3vUZ7CwBCbMvQuDyhmQKfhuxAhaOMmjlWEbds"
+                  className="size-8 rounded-full bg-gray-50"
+                />
+                <span className="hidden lg:flex lg:items-center">
+                  <span aria-hidden="true" className="ml-4 text-sm/6 font-semibold text-gray-900">
+                    Leonardo Revrenna
+                  </span>
+                  <ChevronDownIcon aria-hidden="true" className="ml-2 size-5 text-gray-400" />
+                </span>
+              </MenuButton>
+              <MenuItems
+                transition
+                className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+              >
+                {userNavigation.map((item) => (
+                  <MenuItem key={item.name}>
+                    <a
+                      href={item.href}
+                      className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
+                    >
+                      {item.name}
+                    </a>
+                  </MenuItem>
+                ))}
+              </MenuItems>
+            </Menu>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <DisclosurePanel className="md:hidden bg-white/95 backdrop-blur-sm">
-        <div className="space-y-1 px-4 pb-3 pt-2">
-          {navigation.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as={Link}
-              href={item.href}
-              className={`block rounded-md px-3 py-2 text-base font-medium transition-colors ${
-                isActive(item.href)
-                  ? 'bg-indigo-100 text-indigo-700'
-                  : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-              }`}
-            >
-              {item.name}
-            </DisclosureButton>
-          ))}
-        </div>
-        <div className="border-t border-gray-200 px-4 pb-3 pt-4">
-          <div className="space-y-2">
-            <DisclosureButton
-              as={Link}
-              href="/login"
-              className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors"
-            >
-              Log in
-            </DisclosureButton>
-            <DisclosureButton
-              as={Link}
-              href="/signup"
-              className="block rounded-md bg-indigo-600 px-3 py-2 text-base font-medium text-white hover:bg-indigo-500 transition-colors"
-            >
-              Start Free
-            </DisclosureButton>
-          </div>
-        </div>
-      </DisclosurePanel>
     </Disclosure>
   )
 }
