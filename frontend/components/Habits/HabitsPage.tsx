@@ -12,11 +12,20 @@ const HabitsPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+
+    const userString = localStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null;
+    console.log(user);
     const fetchHabits = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:4000/api/habits');
-        
+        const response = await fetch(`http://localhost:4000/api/habits?id=${user?.id}`, {
+          method:'GET',
+          headers:{
+            'Content-Type':'application/json'
+          }
+        });
+
         if (!response.ok) {
           throw new Error('Failed to fetch habits');
         }

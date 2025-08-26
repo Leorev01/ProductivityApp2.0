@@ -1,7 +1,6 @@
 'use client';
 
 import { Disclosure } from '@headlessui/react'
-import Link from 'next/link'
 import {
   Menu,
   MenuButton,
@@ -23,14 +22,12 @@ export default function UserNavbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex shrink-0 items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <img
-                alt="Productivity App"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto"
-              />
-              <span className="hidden sm:block text-xl font-bold text-gray-900">ProductiveLife</span>
-            </Link>
+            <img
+              alt="Productivity App"
+              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+              className="h-8 w-auto"
+            />
+            <span className="hidden sm:block text-xl font-bold text-gray-900">ProductiveLife</span>
           </div>
 
           {/* Auth Buttons - Desktop */}
