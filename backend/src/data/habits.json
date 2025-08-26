@@ -16,7 +16,7 @@
     },
     {
       "id": 3,
-      "userId": 1,
+      "userId": 2,
       "title": "Learn French",
       "description": "Do at least 20 minutes of Duolingo in French daily.",
       "createdAt": "2025-06-01"
