@@ -1,7 +1,6 @@
 'use client'
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
-import Navbar from "@/components/Navbars/Navbar";
 
 //Once using database remove UseEffect
 export default function HomeLayout({
@@ -14,7 +13,6 @@ export default function HomeLayout({
   }, []);
 
   return <>
-    <Navbar />
     {children}
     </>;
 }
