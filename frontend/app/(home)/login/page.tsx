@@ -19,11 +19,10 @@ export default function Login() {
       },
       body: JSON.stringify({email, password})
     })
-    if(!response.ok){
-      setError("Unable to login")
-      throw new Error("Unable to login")
-    }
     const result = await response.json()
+    if(!response.ok){
+      setError(result.message)
+    }
     localStorage.setItem('user', JSON.stringify(result.user)) 
     router.push('/dashboard');
     toast.success('Logged in successfully!');
@@ -85,6 +84,7 @@ export default function Login() {
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                       />
                     </div>
+                    {error && <p className='text-sm text-red-500'>{error}</p>}
                   </div>
 
                   <div className="flex items-center justify-between">
@@ -125,7 +125,7 @@ export default function Login() {
                     </div>
 
                     <div className="text-sm/6">
-                      <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                      <a href="/forgot-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
                         Forgot password?
                       </a>
                     </div>
