@@ -1,4 +1,41 @@
+'use client';
+import { FormEvent, useState } from "react"
+import { useRouter } from "next/navigation";
+import {toast} from 'react-hot-toast'
+
 export default function Signup() {
+
+  const router = useRouter();
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmP, setConfirmP] = useState('')
+  const [error, setError] = useState('')
+
+  const registerHandler = async (e:FormEvent) => {
+    e.preventDefault()
+    if(password !== confirmP){
+      setError("Passwords do not match");
+      return;
+    }
+    const response = await fetch("http://localhost:4000/api/auth/register", {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify({name, username, email, password})
+    })
+
+    const result = await response.json()
+    if(!response.ok){
+      setError(result.message)
+    }
+    localStorage.setItem('user', result.user);
+    router.push('/dashboard');
+    toast.success("Registered Succesfully")
+  }
+
   return (
       <div className="flex min-h-[calc(100vh-4rem)] flex-1">
         <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
@@ -20,7 +57,7 @@ export default function Signup() {
 
             <div className="mt-8">
               <div>
-                <form action="#" method="POST" className="space-y-3">
+                <form onSubmit={(e) => registerHandler(e)} method="POST" className="space-y-3">
                   <div>
                     <label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">
                       Full name
@@ -30,6 +67,8 @@ export default function Signup() {
                         id="name"
                         name="name"
                         type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         required
                         autoComplete="name"
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -45,6 +84,8 @@ export default function Signup() {
                         id="username"
                         name="username"
                         type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                         required
                         autoComplete="username"
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -60,6 +101,8 @@ export default function Signup() {
                         id="email"
                         name="email"
                         type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                         autoComplete="email"
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -76,6 +119,8 @@ export default function Signup() {
                         id="password"
                         name="password"
                         type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                         autoComplete="current-password"
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -92,11 +137,14 @@ export default function Signup() {
                         id="confirm-password"
                         name="confirm-password"
                         type="password"
+                        value={confirmP}
+                        onChange={(e) => setConfirmP(e.target.value)}
                         required
                         autoComplete="current-password"
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                       />
                     </div>
+                    {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
                   </div>
 
                   <div className="flex items-center justify-between">
