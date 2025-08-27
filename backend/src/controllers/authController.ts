@@ -33,11 +33,11 @@ const saveUsersData = async (users: User[]): Promise<void> => {
 
 // Register user function
 const registerUser = async (req: Request, res: Response): Promise<void> => {
-    const { email, password } = req.body
+    const { name, username, email, password } = req.body
     
     // Validate input
-    if (!email || !password) {
-        res.status(400).json({ message: 'Email and password are required' })
+    if (!email || !password || !name || !username) {
+        res.status(400).json({ message: 'All fields are required' })
         return
     }
     
@@ -55,8 +55,8 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
             id: userData.length + 1,
             email,
             password: hashedPassword,
-            name: 'User', // Default name, can be changed later
-            username: 'user' + (userData.length + 1), // Default username
+            name: name, // Default name, can be changed later
+            username: username, // Default username
             avatar: 'https://example.com/avatar' + (userData.length + 1),
             phone: '', // Default phone, can be changed later
             joinDate: new Date().toISOString().split('T')[0], // Current date
