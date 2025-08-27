@@ -97,10 +97,10 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
         const user = userData.find((user) => user.email === email)
         
         if (!user) {
-            res.status(401).json({ message: 'Invalid credentials' })
+            res.status(401).json({ message: 'User does not exist' })
             return
         } if(password !== user.password){
-            res.status(401).json({ message: 'Invalid credentials' })
+            res.status(401).json({ message: 'Email and password do not match' })
             return 
         }
         
