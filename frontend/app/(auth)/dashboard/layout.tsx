@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import {
@@ -25,6 +25,8 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { User } from '@/types/types'
+import Image from 'next/image'
 
 const navigation = [
   { name: 'Home', icon: HomeIcon, href: '/' },
@@ -57,6 +59,18 @@ export default function DashboardLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const pathname = usePathname()
+  const [user, setUser] = useState<User>()
+
+  useEffect(() => {
+    const fetchUser = () => {
+      const saved = localStorage.getItem('user')
+      if(!saved){
+        throw new Error("I don't know have you've reached this page as there is no user")
+      }
+      setUser(JSON.parse(saved))
+    }
+    fetchUser();
+  }, [])
 
   return (
     <div>
@@ -158,10 +172,12 @@ export default function DashboardLayout({
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
           <div className="flex h-16 shrink-0 items-center">
-            <img
+            <Image
               alt="Your Company"
               src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
               className="h-8 w-auto"
+              height={32}
+              width={32}
             />
           </div>
           <nav className="flex flex-1 flex-col">
@@ -264,14 +280,16 @@ export default function DashboardLayout({
                 <MenuButton className="relative flex items-center">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
-                  <img
-                    alt=""
-                    src="https://media.licdn.com/dms/image/v2/D4E03AQHkICFwtKrgxg/profile-displayphoto-shrink_800_800/B4EZYfr_gEHgAc-/0/1744288351996?e=1756339200&v=beta&t=LX_vMZ3vUZ7CwBCbMvQuDyhmQKfhuxAhaOMmjlWEbds"
+                  <Image
+                    alt="Profile Image"
+                    src={/*user?.avatar ??*/ '/default-avatar.png'}
                     className="size-8 rounded-full bg-gray-50"
+                    width={40}
+                    height={40}
                   />
                   <span className="hidden lg:flex lg:items-center">
                     <span aria-hidden="true" className="ml-4 text-sm/6 font-semibold text-gray-900">
-                      Leonardo Revrenna
+                      {user?.name}
                     </span>
                     <ChevronDownIcon aria-hidden="true" className="ml-2 size-5 text-gray-400" />
                   </span>
@@ -282,12 +300,12 @@ export default function DashboardLayout({
                 >
                   {userNavigation.map((item) => (
                     <MenuItem key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </MenuItem>
                   ))}
                 </MenuItems>
