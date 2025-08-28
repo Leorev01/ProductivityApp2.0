@@ -1,4 +1,6 @@
 import { ChartBarIcon, TrophyIcon, UserGroupIcon } from '@heroicons/react/20/solid'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const features = [
   {
@@ -32,15 +34,15 @@ export default function FeatureSection() {
                 Join thousands of users who have revolutionized their daily routines with our gamified habit tracking system. Build lasting habits that actually stick.
               </p>
               <div className="mt-8">
-                <a
+                <Link
                   href="/signup"
                   className="inline-flex rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Start building habits
-                </a>
+                </Link>
               </div>
             </div>
-            <img
+            <Image
               alt="ProductiveLife app dashboard screenshot"
               src="https://tailwindcss.com/plus-assets/img/component-images/dark-project-app-screenshot.png"
               width={2432}

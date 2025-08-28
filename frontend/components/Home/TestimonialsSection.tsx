@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 // components/Home/TestimonialsSection.tsx
 const featuredTestimonial = {
   body: 'ProductiveLife completely transformed how I approach habit building. The gamification makes every day feel like progress, and I\'ve built more consistent habits in 3 months than I did in 3 years of trying other methods.',
@@ -116,7 +118,9 @@ export default function TestimonialsSection() {
               <p>&quot;{featuredTestimonial.body}&quot;</p>
             </blockquote>
             <figcaption className="flex flex-wrap items-center gap-x-4 gap-y-4 border-t border-gray-900/10 px-6 py-4 sm:flex-nowrap">
-              <img
+              <Image
+                width={40}
+                height={40}
                 alt=""
                 src={featuredTestimonial.author.imageUrl}
                 className="size-10 flex-none rounded-full bg-gray-50"
@@ -125,7 +129,13 @@ export default function TestimonialsSection() {
                 <div className="font-semibold">{featuredTestimonial.author.name}</div>
                 <div className="text-gray-600">@{featuredTestimonial.author.handle}</div>
               </div>
-              <img alt="" src={featuredTestimonial.author.logoUrl} className="h-10 w-auto flex-none" />
+              <Image
+                width={40}
+                height={40}
+                alt=""
+                src={featuredTestimonial.author.logoUrl}
+                className="h-10 w-auto flex-none"
+              />
             </figcaption>
           </figure>
           {testimonials.map((columnGroup, columnGroupIdx) => (
@@ -150,7 +160,13 @@ export default function TestimonialsSection() {
                         <p>&quot;{testimonial.body}&quot;</p>
                       </blockquote>
                       <figcaption className="mt-6 flex items-center gap-x-4">
-                        <img alt="" src={testimonial.author.imageUrl} className="size-10 rounded-full bg-gray-50" />
+                        <Image
+                          width={40}
+                          height={40}
+                          alt=""
+                          src={testimonial.author.imageUrl}
+                          className="size-10 rounded-full bg-gray-50"
+                        />
                         <div>
                           <div className="font-semibold">{testimonial.author.name}</div>
                           <div className="text-gray-600">@{testimonial.author.handle}</div>
