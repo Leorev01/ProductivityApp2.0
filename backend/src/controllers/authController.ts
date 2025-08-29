@@ -73,7 +73,7 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
         
         res.status(201).json({ 
             message: 'User registered successfully',
-            user: { id: newUser.id, email: newUser.email } // Don't send password back
+            user: newUser // Don't send password back
         })
         
     } catch (error) {
