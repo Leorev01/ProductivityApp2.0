@@ -1,78 +1,109 @@
 [
-    {
-        "id": 1,
-        "email": "email@email.com",
-        "password": "password",
-        "name": "User",
-        "username": "user123",
-        "avatar": "https://example.com/avatar1.png",
-        "phone": "+1 (555) 123-4567",
-        "joinDate": "January 2024",
-        "membershipType": "standard",
-        "daysCompleted": ["2024-01-01", "2024-01-02", "2024-01-03"],
-        "completedTasks": 120,
-        "totalXP": 1500,
-        "level": 10
-    },
-    {
-        "id": 2,
-        "email": "email2@email.com",
-        "password": "password2",
-        "name": "User2",
-        "username": "user234",
-        "avatar": "https://example.com/avatar2.png",
-        "phone": "+1 (555) 123-4568",
-        "joinDate": "January 2024",
-        "membershipType": "standard",
-        "daysCompleted": ["2024-01-01", "2024-01-02"],
-        "completedTasks": 20,
-        "totalXP": 300,
-        "level": 3
-    }
-    ,
-    {
-        "id": 3,
-        "email": "email3@email.com",
-        "password": "password3",
-        "name": "User3",
-        "username": "user345",
-        "avatar": "https://example.com/avatar3.png",
-        "phone": "+1 (555) 123-4569",
-        "joinDate": "January 2024",
-        "membershipType": "standard",
-        "daysCompleted": ["2024-01-01", "2024-01-02"],
-        "completedTasks": 50,
-        "totalXP": 800,
-        "level": 5
-    },
-    {
-        "id": 4,
-        "email": "email4@email.com",
-        "password": "password4",
-        "name": "User4",
-        "username": "user456",
-        "avatar": "https://example.com/avatar4.png",
-        "phone": "+1 (555) 123-4570",
-        "joinDate": "January 2024",
-        "membershipType": "standard",
-        "daysCompleted": ["2024-01-01"],
-        "completedTasks": 80,
-        "totalXP": 1200,
-        "level": 8
-    },
-    {
-        "id": 5,
-        "email": "email5@email.com",
-        "password": "password5",
-        "name": "User5",
-        "username": "user567",
-        "avatar": "https://example.com/avatar5.png",
-        "phone": "+1 (555) 123-4571",
-        "joinDate": "January 2024",
-        "membershipType": "standard",
-        "daysCompleted": [],
-        "completedTasks": 100,
-        "totalXP": 1400,
-        "level": 9
-    }
+  {
+    "id": 1,
+    "email": "email@email.com",
+    "password": "password",
+    "name": "User",
+    "username": "user123",
+    "avatar": "https://example.com/avatar1.png",
+    "phone": "+1 (555) 123-4567",
+    "joinDate": "January 2024",
+    "membershipType": "standard",
+    "daysCompleted": [
+      "2024-01-01",
+      "2024-01-02",
+      "2024-01-03"
+    ],
+    "completedTasks": 120,
+    "totalXP": 1500,
+    "level": 10
+  },
+  {
+    "id": 2,
+    "email": "email2@email.com",
+    "password": "password2",
+    "name": "User2",
+    "username": "user234",
+    "avatar": "https://example.com/avatar2.png",
+    "phone": "+1 (555) 123-4568",
+    "joinDate": "January 2024",
+    "membershipType": "standard",
+    "daysCompleted": [
+      "2024-01-01",
+      "2024-01-02"
+    ],
+    "completedTasks": 20,
+    "totalXP": 300,
+    "level": 3
+  },
+  {
+    "id": 3,
+    "email": "email3@email.com",
+    "password": "password3",
+    "name": "User3",
+    "username": "user345",
+    "avatar": "https://example.com/avatar3.png",
+    "phone": "+1 (555) 123-4569",
+    "joinDate": "January 2024",
+    "membershipType": "standard",
+    "daysCompleted": [
+      "2024-01-01",
+      "2024-01-02"
+    ],
+    "completedTasks": 50,
+    "totalXP": 800,
+    "level": 5
+  },
+  {
+    "id": 4,
+    "email": "email4@email.com",
+    "password": "password4",
+    "name": "User4",
+    "username": "user456",
+    "avatar": "https://example.com/avatar4.png",
+    "phone": "+1 (555) 123-4570",
+    "joinDate": "January 2024",
+    "membershipType": "standard",
+    "daysCompleted": [
+      "2024-01-01"
+    ],
+    "completedTasks": 80,
+    "totalXP": 1200,
+    "level": 8
+  },
+  {
+    "id": 5,
+    "email": "email5@email.com",
+    "password": "password5",
+    "name": "User5",
+    "username": "user567",
+    "avatar": "https://example.com/avatar5.png",
+    "phone": "+1 (555) 123-4571",
+    "joinDate": "January 2024",
+    "membershipType": "standard",
+    "daysCompleted": [],
+    "completedTasks": 100,
+    "totalXP": 1400,
+    "level": 9
+  },
+  {
+    "id": 6,
+    "email": "revrennaleo@gmail.com",
+    "password": "password",
+    "name": "Leonardo Revrenna",
+    "username": "revrennaleo@gmail.com",
+    "avatar": "https://example.com/avatar6",
+    "phone": "",
+    "joinDate": "2025-08-29",
+    "membershipType": "standard",
+    "daysCompleted": [
+      "2025-08-25",
+      "2025-08-26",
+      "2025-08-28",
+      "2025-08-29"
+    ],
+    "completedTasks": 0,
+    "totalXP": 0,
+    "level": 1
+  }
 ]

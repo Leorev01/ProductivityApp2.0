@@ -31,7 +31,7 @@ export default function Signup() {
     if(!response.ok){
       setError(result.message)
     }
-    localStorage.setItem('user', result.user);
+    localStorage.setItem('user', JSON.stringify(result.user));
     router.push('/dashboard');
     toast.success("Registered Succesfully")
   }

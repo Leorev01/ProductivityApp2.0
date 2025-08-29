@@ -50,11 +50,11 @@ const registerUser = async (req: Request, res: Response): Promise<void> => {
             return 
         }
         
-        const hashedPassword = await bcrypt.hash(password, 10)
+        //const hashedPassword = await bcrypt.hash(password, 10)
         const newUser: User = {
             id: userData.length + 1,
             email,
-            password: hashedPassword,
+            password: password,
             name: name, // Default name, can be changed later
             username: username, // Default username
             avatar: 'https://example.com/avatar' + (userData.length + 1),
