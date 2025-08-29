@@ -21,9 +21,9 @@ export default function FriendsPage(){
 
     const fecthFriends = async () => {
       try{
-        const mockUserId = 1 //Fake user ID
+        const user = JSON.parse(localStorage.getItem('user')!);
         
-        const response = await fetch(`http://localhost:4000/api/friends/?userId=${mockUserId}`, {
+        const response = await fetch(`http://localhost:4000/api/friends/?userId=${user.id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
