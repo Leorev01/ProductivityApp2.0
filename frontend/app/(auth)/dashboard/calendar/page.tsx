@@ -6,38 +6,8 @@ import { TrophyIcon } from '@heroicons/react/24/outline'
 import { Friend, User } from '@/types/types'
 import { useRouter } from 'next/navigation'
 
-// Sample habit completion data - in real app this would come from your database
-const habitCompletions: { [date: string]: boolean } = {
-  '2025-08-01': true,
-  '2025-08-02': true,
-  '2025-08-03': false,
-  '2025-08-04': true,
-  '2025-08-05': true,
-  '2025-08-06': true,
-  '2025-08-07': true,
-  '2025-08-08': false,
-  '2025-08-09': true,
-  '2025-08-10': true,
-  '2025-08-11': true,
-  '2025-08-12': true,
-  '2025-08-13': true,
-  '2025-08-14': false,
-  '2025-08-15': true,
-  '2025-08-16': true,
-  '2025-08-17': true,
-  '2025-08-18': true,
-  '2025-08-19': true,
-  '2025-08-20': true,
-  '2025-08-21': false,
-  '2025-08-22': true,
-  '2025-08-23': true,
-  '2025-08-24': true,
-  '2025-08-25': true,
-  '2025-08-26': true,
-  // Today (27th) is incomplete - work in progress
-}
 
-function generateCalendarDays(year: number, month: number) {
+function generateCalendarDays(year: number, month: number, completedDates: string[]) {
   const today = new Date()
   const todayString = today.toISOString().split('T')[0]
   
@@ -70,7 +40,7 @@ function generateCalendarDays(year: number, month: number) {
       date: dateString,
       isCurrentMonth: true,
       isToday: dateString === todayString,
-      completed: habitCompletions[dateString] || false
+      completed: completedDates.includes(dateString)
     })
   }
   
@@ -122,9 +92,9 @@ export default function Calendar() {
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ]
-  
-  const days = useMemo(() => generateCalendarDays(currentYear, currentMonth), [currentYear, currentMonth])
-  
+
+  const days = useMemo(() => generateCalendarDays(currentYear, currentMonth, mainUser?.daysCompleted ?? []), [currentYear, currentMonth, mainUser?.daysCompleted])
+
   const goToPreviousMonth = () => {
     setCurrentDate(new Date(currentYear, currentMonth - 1, 1))
   }
@@ -134,16 +104,16 @@ export default function Calendar() {
   }
 
   useEffect(() => {
-    const mockUserId = 1;
+    const user = JSON.parse(localStorage.getItem('user')!);
     const fecthLeaderboard = async () => {
-      const response = await fetch(`http://localhost:4000/api/friends/?userId=${mockUserId}`, {
+      const response = await fetch(`http://localhost:4000/api/friends/?userId=${user.id}`, {
         method: 'GET',
         headers: {
           'Content-Type':'application/json'
         }
       })
       if(!response.ok) throw new Error("Failed to fetch friends");
-      const response2 = await fetch(`http://localhost:4000/api/user/?id=${mockUserId}`);
+      const response2 = await fetch(`http://localhost:4000/api/user/?id=${user.id}`);
       if(!response2.ok) throw new Error("Failed to fetch user");
       const friends = await response.json();
       const friendsData = friends.data.filter((friend:Friend) => friend.status === 'accepted');
