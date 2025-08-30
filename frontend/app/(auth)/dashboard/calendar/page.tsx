@@ -92,8 +92,14 @@ export default function Calendar() {
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ]
-
-  const days = useMemo(() => generateCalendarDays(currentYear, currentMonth, mainUser?.daysCompleted ?? []), [currentYear, currentMonth, mainUser?.daysCompleted])
+  const days = useMemo(() => {
+    const completedDates = Array.isArray(mainUser?.daysCompleted)
+      ? mainUser.daysCompleted.map((entry: { date: string } | string) =>
+          typeof entry === 'string' ? entry : entry.date
+        )
+      : [];
+    return generateCalendarDays(currentYear, currentMonth, completedDates);
+  }, [currentYear, currentMonth, mainUser?.daysCompleted]);
 
   const goToPreviousMonth = () => {
     setCurrentDate(new Date(currentYear, currentMonth - 1, 1))
