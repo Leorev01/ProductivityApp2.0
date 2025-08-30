@@ -7,7 +7,7 @@ export default function AuthLayout({
 }: { children: React.ReactNode }) {
   useEffect(() => {
     if (typeof window !== "undefined" && !localStorage.getItem("user")) {
-      redirect("/home");
+      redirect("/");
     }
   }, []);
 
