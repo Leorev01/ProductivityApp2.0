@@ -22,6 +22,7 @@ export default function Login() {
     const result = await response.json()
     if(!response.ok){
       setError(result.message)
+      return;
     }
     localStorage.setItem('user', JSON.stringify(result.user)) 
     router.push('/dashboard');
