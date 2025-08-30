@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import {
   Dialog,
@@ -27,6 +27,7 @@ import {
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { User } from '@/types/types'
 import Image from 'next/image'
+import {toast} from 'react-hot-toast'
 
 const navigation = [
   { name: 'Home', icon: HomeIcon, href: '/' },
@@ -43,11 +44,6 @@ const teams = [
   { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
 ]
 
-const userNavigation = [
-  { name: 'Your profile', href: '/profile' },
-  { name: 'Sign out', href: '#' },
-]
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
@@ -60,17 +56,30 @@ export default function DashboardLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const pathname = usePathname()
   const [user, setUser] = useState<User>()
+  const router = useRouter()
 
   useEffect(() => {
     const fetchUser = () => {
       const saved = localStorage.getItem('user')
       if(!saved){
-        throw new Error("I don't know have you've reached this page as there is no user")
+        router.push('/')
+        return;
       }
       setUser(JSON.parse(saved))
     }
     fetchUser();
   }, [])
+
+  const signOutHandler = () => {
+    localStorage.removeItem('user');
+    router.push('/')
+    toast.success("Logged out successfully!")
+  }
+
+  const userNavigation = [
+    { name: 'Your profile', href: '/profile' },
+    { name: 'Sign out', href: '#', onClick: signOutHandler },
+  ]
 
   return (
     <div>
@@ -300,12 +309,13 @@ export default function DashboardLayout({
                 >
                   {userNavigation.map((item) => (
                     <MenuItem key={item.name}>
-                      <Link
+                      <a
                         href={item.href}
                         className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
+                        onClick={item.onClick}
                       >
                         {item.name}
-                      </Link>
+                      </a>
                     </MenuItem>
                   ))}
                 </MenuItems>

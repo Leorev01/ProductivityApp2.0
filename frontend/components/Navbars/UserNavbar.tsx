@@ -1,5 +1,6 @@
-'use client';
-
+'use client'
+import {useRouter} from 'next/navigation'
+import {toast} from 'react-hot-toast'
 import { Disclosure } from '@headlessui/react'
 import {
   Menu,
@@ -11,9 +12,17 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 export default function UserNavbar() {
 
+  const router = useRouter()
+
+  const signOutHandler = () => {
+    localStorage.removeItem('user');
+    router.push('/')
+    toast.success("Logged out successfully!")
+  }
+
   const userNavigation = [
     { name: 'Dashboard', href: '/dashboard' },
-    { name: 'Sign out', href: '#' },
+    { name: 'Sign out', href: '#', onClick: signOutHandler },
   ]
 
   return (
@@ -56,6 +65,7 @@ export default function UserNavbar() {
                     <a
                       href={item.href}
                       className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
+                      onClick={item.onClick}
                     >
                       {item.name}
                     </a>
