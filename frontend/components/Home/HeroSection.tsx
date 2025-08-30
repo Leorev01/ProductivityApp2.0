@@ -40,7 +40,7 @@ export default function HeroSection() {
               >
                 Start for free
               </Link>
-              <Link href="/dashboard" className="text-sm/6 font-semibold text-gray-900">
+              <Link href="/demo" className="text-sm/6 font-semibold text-gray-900">
                 View demo <span aria-hidden="true">→</span>
               </Link>
             </div>
