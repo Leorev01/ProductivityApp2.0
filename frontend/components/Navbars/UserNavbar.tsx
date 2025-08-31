@@ -9,13 +9,26 @@ import {
   MenuItems,
 } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { useEffect, useState } from 'react'
+import { User } from '@/types/types'
 
 export default function UserNavbar() {
 
   const router = useRouter()
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem('user')!)
+    if(!saved) {
+      router.push('/login')
+    }
+    setUser(saved)
+
+  }, [router])
 
   const signOutHandler = () => {
     localStorage.removeItem('user');
+    setUser(null);
     router.push('/')
     toast.success("Logged out successfully!")
   }
@@ -46,12 +59,12 @@ export default function UserNavbar() {
                 <span className="sr-only">Open user menu</span>
                 <img
                   alt=""
-                  src="https://media.licdn.com/dms/image/v2/D4E03AQHkICFwtKrgxg/profile-displayphoto-shrink_800_800/B4EZYfr_gEHgAc-/0/1744288351996?e=1756339200&v=beta&t=LX_vMZ3vUZ7CwBCbMvQuDyhmQKfhuxAhaOMmjlWEbds"
+                  src={user?.avatar}
                   className="size-8 rounded-full bg-gray-50"
                 />
                 <span className="hidden lg:flex lg:items-center">
                   <span aria-hidden="true" className="ml-4 text-sm/6 font-semibold text-gray-900">
-                    Leonardo Revrenna
+                    {user?.name}
                   </span>
                   <ChevronDownIcon aria-hidden="true" className="ml-2 size-5 text-gray-400" />
                 </span>

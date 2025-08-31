@@ -11,6 +11,7 @@ import {
   PencilIcon,
   CheckIcon,
 } from '@heroicons/react/24/outline';
+import UserNavbar from '@/components/Navbars/UserNavbar';
 
 export default function ProfilePage() {
   const [profileData, setProfileData] = useState({
@@ -30,52 +31,34 @@ export default function ProfilePage() {
 
   const [editData, setEditData] = useState(profileData);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        setLoading(true);
-        // Changed from https to http and updated endpoint
-        const response = await fetch('http://localhost:4000/api/user?id=1', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            // Add authorization header if you have authentication
-            // 'Authorization': `Bearer ${token}`,
-          },
-        });
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        setProfileData({
-          id: data.id || 1,
-          name: data.name || 'Alex Johnson',
-          username: data.username || 'alexjohnson',
-          avatar: data.avatar || 'https://example.com/avatar1',
-          email: data.email || 'alex.johnson@example.com',
-          phone: data.phone || '+1 (555) 123-4567',
-          joinDate: data.joinDate || 'January 2024',
-          membershipType: data.membershipType || 'Standard',
-          daysCompleted: data.daysCompleted || [],
-          completedTasks: data.completedTasks || 0,
-          totalXP: data.totalXP || 0,
-          level: data.level || 0,
-        });
-        setEditData(profileData);
-      } catch (error: any) {
-        console.error('Error fetching user data:', error);
-        setError(error.message);
-        // Keep default data on error
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchUser();
+    const data = JSON.parse(localStorage.getItem('user')!)
+    if(!data) {
+      setError('User data not found')
+    }else{
+      setProfileData({
+        id: data.id || 1,
+        name: data.name || 'Alex Johnson',
+        username: data.username || 'alexjohnson',
+        avatar: data.avatar || 'https://example.com/avatar1',
+        email: data.email || 'alex.johnson@example.com',
+        phone: data.phone || '+1 (555) 123-4567',
+        joinDate: data.joinDate || 'January 2024',
+        membershipType: data.membershipType || 'Standard',
+        daysCompleted: data.daysCompleted || [],
+        completedTasks: data.completedTasks || 0,
+        totalXP: data.totalXP || 0,
+        level: data.level || 0,
+      });
+      setEditData(profileData);
+
+    }
+
+    setLoading(false);
+
   }, []);
 
   const stats = [
@@ -116,6 +99,7 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 mt-10">
+      <UserNavbar />
       {/* Rest of your component stays the same */}
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
