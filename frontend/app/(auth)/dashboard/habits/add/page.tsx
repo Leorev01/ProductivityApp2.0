@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, FormEvent } from 'react'
 import {
   Label,
   Listbox,
@@ -13,6 +13,9 @@ import {
   PaperClipIcon,
   TagIcon
 } from '@heroicons/react/20/solid'
+import {User} from '@/types/types'
+import {toast} from 'react-hot-toast'
+import {useRouter} from 'next/navigation'
 
 const labels = [
   { name: 'Unlabelled', value: null },
@@ -38,12 +41,45 @@ function classNames(...classes: string[]) {
 }
 
 export default function AddHabit() {
+  const [user, setUser] = useState<User | null>(null);
   const [labelled, setLabelled] = useState(labels[0])
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('');
+  const [labelType, setLabelType] = useState('')
   const [dueDate, setDueDate] = useState('')
   const today = new Date().toISOString().split('T')[0]
+  const router = useRouter();
+
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem('user')!)
+    setUser(savedUser);
+  }, [])
+
+  const addHabitHandler = async (e:FormEvent) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:4000/api/habits/", {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify({
+        userId: user?.id,
+        title: title,
+        description: description,
+        label: labelType,
+        date: dueDate
+      })
+    })
+    if(!response.ok){
+      toast.error('Error adding habit');
+      return;
+    }
+    router.push('/dashboard/habits')
+    toast.success('Habit added successfully');
+  }
 
   return (
-    <form action="#" className="relative">
+    <form onSubmit={(e) => addHabitHandler(e)} className="relative">
       <div className="rounded-lg bg-white outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
         <label htmlFor="title" className="sr-only">
           Title
@@ -52,6 +88,9 @@ export default function AddHabit() {
           id="title"
           name="title"
           type="text"
+          value={title}
+          required
+          onChange={(e) => setTitle(e.target.value)}
           placeholder="Title"
           className="block w-full px-3 pt-2.5 text-lg font-medium text-gray-900 placeholder:text-gray-400 focus:outline-none"
         />
@@ -60,11 +99,12 @@ export default function AddHabit() {
         </label>
         <textarea
           id="description"
-          name="description"
+          name="description" 
           rows={2}
           placeholder="Write a description..."
           className="block w-full resize-none px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
-          defaultValue={''}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
         {/* Spacer */}
         <div aria-hidden="true">
@@ -111,6 +151,7 @@ export default function AddHabit() {
                   <ListboxOption
                     key={label.value}
                     value={label}
+                    onClick={() => setLabelType(label.name)}
                     className="cursor-default select-none bg-white px-3 py-2 data-[focus]:bg-gray-100"
                   >
                     <div className="flex items-center">

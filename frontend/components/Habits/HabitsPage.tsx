@@ -15,7 +15,6 @@ const HabitsPage = () => {
 
     const userString = localStorage.getItem("user");
     const user = userString ? JSON.parse(userString) : null;
-    console.log(user);
     const fetchHabits = async () => {
       try {
         setLoading(true);
