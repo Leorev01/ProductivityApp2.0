@@ -40,9 +40,37 @@ const fetchHabit = async (req: Request, res: Response) => {
         console.error('Error reading habits:', error);
         res.status(500).json({ 
             success: false,
-            error: 'Failed to read habits' 
+            error: 'Failed to read habit' 
         });
     }
 }
 
-export {fetchHabit, fetchAllHabits};
+const addHabit = async (req:Request, res:Response) => {
+    try{
+        const habit = req.body
+        const data = await fs.promises.readFile(filePath, 'utf-8');
+        const habitsData = JSON.parse(data)
+        const newHabit = {
+            id: habitsData.habits.length + 1,
+            userId: habit.userId,
+            title: habit.title,
+            description: habit.description,
+            label: habit.label,
+            dateTo: habit.date
+        }
+        habitsData.habits.push(newHabit)
+        await fs.promises.writeFile(filePath, JSON.stringify(habitsData, null, 2))
+        res.status(200).json({
+            success:true,
+            message: 'Habit created successfully'
+        })
+
+    }catch(error){
+        res.status(500).json({
+            success:false,
+            message: 'Failed to add habit: ' + error
+        })
+    }
+}
+
+export {fetchHabit, fetchAllHabits, addHabit};

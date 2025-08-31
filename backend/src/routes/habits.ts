@@ -1,5 +1,5 @@
 import express from "express";
-import {fetchHabit, fetchAllHabits} from "../controllers/habitController.js";
+import {fetchHabit, fetchAllHabits, addHabit} from "../controllers/habitController.js";
 
 //Create router
 const router = express.Router();
@@ -12,8 +12,8 @@ router.get("/", fetchHabit);
 // GET /api/habits - Get a habits
 router.get("/all", fetchAllHabits);
 
-// // POST /api/habits - Create a new habit
-// router.post("/", addHabit);
+// POST /api/habits - Create a new habit
+router.post("/", addHabit);
 
 // // PUT /api/habits/:id - Update an existing habit
 // router.put("/:id", updateHabit);
